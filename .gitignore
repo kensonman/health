@@ -1,0 +1,11 @@
+# Ignore all compiled python cached
+*.pyc
+
+# Ignore vim cached
+*.swp
+
+# Ignore the permanent data
+permanent/
+
+# Ingore the log folder
+logs/
