@@ -141,3 +141,23 @@ LOGIN_URL = 'webframe:login'
 
 # Templates
 TMPL_HEADER='health/header.html'
+
+# Logging
+if not os.path.isdir('logs'): os.mkdir('logs')
+LOGGING={
+   'version': 1,
+   'disable_existing_loggers': False,
+   'formatters': {
+     'verbose': { 'format':'[%(asctime)s] %(levelname)s [%(name)s:%(filename)s:%(lineno)s] %(message)s', 'datefmt':'%d/%b/%Y %H:%M:%S' },
+     'simple':  { 'format':'%(levelname)s <%(filename)s:%(lineno)d> %(message)s' },
+   },
+   'handlers': {
+      'console': { 'level': 'DEBUG', 'class': 'logging.StreamHandler', 'formatter': 'simple' },
+      'file': {'level': 'INFO', 'class': 'logging.handlers.TimedRotatingFileHandler', 'formatter': 'verbose', 'filename': './logs/runtime.log', 'when':'midnight'},
+   },
+   'loggers':{
+     'django': {'handlers':['console', 'file'], 'propagate': True, 'level': 'WARNING'},
+     'webframe': { 'handlers': ['console', ], 'level': 'WARNING'},
+     'health': {'handlers': ['console', 'file'], 'level': 'DEBUG'},
+   },
+}

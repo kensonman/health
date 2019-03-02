@@ -1,0 +1,23 @@
+{%extends TMPL_BASE%}{%load i18n django_tables2%}
+{%block title%}{%trans 'health.models.Categories'%} - {%trans 'appName'%}{%endblock%}
+
+{%block content%}<div class="jumbotron">
+   <h1 class="page-title">{%trans 'health.models.Categories'%}</h1>
+   {%render_table target%}
+
+   <div class="pnl-btns">
+      <a href="{%url 'category' id='new'%}" class="btn btn-success"><i class="fas fa-plus"></i> {%trans 'health.models.Category.create'%}</a>
+   </div>
+</div>{%endblock%}
+
+{%block loading%}{{block.super}}
+<script type="text/javascript"><!--
+$(document).ready(function(){
+   $('tr[oId]')
+      .hover(function(){ $(this).addClass('alert-danger'); }, function(){ $(this).removeClass('alert-danger'); })
+      .css({'cursor': 'pointer'})
+      .click(function(){ window.location.href="{%url 'category' id='__new__'%}".replace('__new__', $(this).attr('oId')); })
+   ;
+});
+//--></script>
+{%endblock%}

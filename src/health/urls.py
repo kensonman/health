@@ -22,5 +22,7 @@ from . import views
 
 
 urlpatterns = [
-    re_path('$', views.dashboard, name='dashboard'),
+    re_path('^$', views.dashboard, name='dashboard'),
+    re_path('^categories/?$', views.categories, name='categories'),
+    re_path('^categories/(?P<id>[^\/]+)/?$', views.category, name='category'),
 ]
