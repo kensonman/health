@@ -1,10 +1,10 @@
 {%extends TMPL_BASE%}{%load i18n django_tables2%}
 {%block title%}{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%} - {%trans 'appName'%}{%endblock%}
 
-{%block content%}<div class="jumbotron">
-   <h1 class="page-title">{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%}</h1>
+{%block content%}<div class="card">
+   <div class="card-header">{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%}</div>
 
-   <form method="POST" id="voForm">
+   <div class="card-body"><form method="POST" id="voForm">
       <input type="hidden" name="_method" value="POST"/>
       {%csrf_token%}
 
@@ -33,17 +33,36 @@
          <input type="number" name="maximum" id="maximumFld" value="{{target.maximum|default:'0'}}" required="required" class="form-control"/>
       </div>
 
+      <div class="field form-group">
+         <label for="tagsFld">{%trans 'Category.tags'%}</label>
+         <textarea name="tags" id="tagsFld" class="form-control">{{target.tags|default:''}}</textarea>
+      </div>
+
       <div class="pnl-btns">
+         {%if not target.isNew%}<button type="button" class="btn btn-outline-primary" id="readonlyBtn"><i class="fas fa-edit"></i> {%trans 'actions.readonly'%}</button>{%endif%}
          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
       </div>
-   </form>
-
+   </form></div>
 </div>{%endblock%}
 
 {%block loading%}{{block.super}}
 <script type="text/javascript"><!--
 $(document).ready(function(){
    $('#voForm').validate({});
+   //{%if not target.isNew%} If opening the existing category
+   var toggleReadonly=function(){
+      if($('#voForm').attr('readonly')){
+         $('#voForm input').removeAttr('readonly');
+         $('#voForm textarea').removeAttr('readonly');
+         $('#voForm').removeAttr('readonly');
+      }else{
+         $('#voForm input').attr('readonly', 'readonly');
+         $('#voForm textarea').attr('readonly', 'readonly');
+         $('#voForm').attr('readonly', 'readonly');
+      }
+   };
+   $('#readonlyBtn').click(toggleReadonly).click();
+   //{%endif%}
 });
 //--></script>
 {%endblock%}

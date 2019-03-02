@@ -49,6 +49,13 @@ def category(req, id):
       target.sequence=float(req.POST.get('sequence', '100'))
       target.user=req.user
       target.save()
+
+      ntags=[t.strip() for t in req.POST.get('tags', '').split(',') if len(t.strip())>0]
+      otags=[t.name for t in Tag.objects.filter(category=target)]
+      for t in ntags:
+         if t not in otags: Tag(category=target, name=t).save() # Create the new tag if that is not exists in otags
+      for t in otags:
+         if t not in ntags: Tag.objects.get(category=target, name=t).delete() #Remove the tag if that is not exists in ntags
       messages.success(req, _('%(objtype)s::%(target)s[%(id)s] saved')%{'objtype': _('health.models.Category'), 'target':target.name, 'id':target.id})
       return redirect('categories')
    elif req.method=='DELETE':

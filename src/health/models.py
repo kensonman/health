@@ -26,6 +26,10 @@ class Category(OrderableValueObject):
    maximum                 =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Category.maximum'))
    user                    =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Category.user'))
 
+   @property
+   def tags(self):
+      return ', '.join([t.name for t in Tag.objects.filter(category=self)])
+
 class Tag(ValueObject):
    class META(object):
       verbose_name         =_('health.models.Tag')
