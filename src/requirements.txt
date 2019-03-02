@@ -1,6 +1,11 @@
-django-method-override
-pillow
-six
-pytz
-netaddr
-deprecation
+deprecation==2.0.6
+Django==2.1.7
+django-method-override==1.0.3
+django-tables2==2.0.5
+netaddr==0.7.19
+packaging==19.0
+Pillow==5.3.0
+psycopg2==2.7.6.1
+pyparsing==2.3.1
+pytz==2018.9
+six==1.12.0

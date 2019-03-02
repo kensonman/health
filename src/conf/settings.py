@@ -25,7 +25,7 @@ SECRET_KEY = '9d4+exhq7pq(*5ow9_my49g7hzr+%^*k$fuylts12k+y64xz_%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['locahost', 'health.kenson.idv.hk']
+ALLOWED_HOSTS = ['locahost:8000', 'localhost', 'health.kenson.idv.hk']
 
 
 # Application definition
@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'webframe.providers.absolute_path', 'webframe.providers.fmt_injection', 'webframe.providers.template_injection'
             ],
         },
     },
@@ -126,4 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT= 'static'
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = 'media'
 LOGIN_URL = 'webframe:login'
