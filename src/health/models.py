@@ -15,7 +15,7 @@ maxval=8 #Max-Digits
 decval=5 #Decimal-Places
 defval=0 #Default-Value
 
-class Category(ValueObject):
+class Category(OrderableValueObject):
    class META(object):
       verbose_name         =_('health.models.Category')
       verbose_name_plural  =_('health.models.Categories')

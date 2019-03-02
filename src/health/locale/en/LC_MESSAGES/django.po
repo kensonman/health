@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-02 08:37+0000\n"
+"POT-Creation-Date: 2019-03-02 09:16+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5
+#: templates/health/category.html:5 views.py:50 views.py:55
 msgid "health.models.Category"
 msgstr "Category"
 
@@ -34,11 +34,11 @@ msgstr "Name"
 msgid "Category.desc"
 msgstr "Desc"
 
-#: models.py:25 templates/health/category.html:22
+#: models.py:25 templates/health/category.html:27
 msgid "Category.minimum"
 msgstr "Minimum Standard"
 
-#: models.py:26 templates/health/category.html:27
+#: models.py:26 templates/health/category.html:32
 msgid "Category.maximum"
 msgstr "Maximum Standard"
 
@@ -92,7 +92,11 @@ msgstr "Health"
 msgid "health.models.Category.create"
 msgstr "Create Category"
 
-#: templates/health/category.html:32
+#: templates/health/category.html:22
+msgid "Category.sequence"
+msgstr "Sequence"
+
+#: templates/health/category.html:37
 msgid "actions.submit"
 msgstr "Submit"
 
@@ -120,3 +124,13 @@ msgstr "Logout"
 #: templates/health/header.html:33
 msgid "login"
 msgstr "Login"
+
+#: views.py:50
+#, python-format
+msgid "%(objtype)s::%(target)s[%(id)s] saved"
+msgstr ""
+
+#: views.py:55
+#, python-format
+msgid "%(objtype)s::%(target)s[%(id)s] deleted"
+msgstr ""
