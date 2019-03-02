@@ -28,7 +28,11 @@ class Category(OrderableValueObject):
 
    @property
    def tags(self):
-      return ', '.join([t.name for t in Tag.objects.filter(category=self)])
+      return Tag.objects.filter(category=self).order_by('name')
+
+   @property
+   def tagsString(self):
+      return ', '.join([t.name for t in self.tags])
 
 class Tag(ValueObject):
    class META(object):

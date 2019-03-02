@@ -1,7 +1,7 @@
 {%extends TMPL_BASE%}{%load i18n django_tables2%}
 {%block title%}{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%} - {%trans 'appName'%}{%endblock%}
 
-{%block content%}<div class="card">
+{%block content%}<div class="jumbotron"><div class="card">
    <div class="card-header">{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%}</div>
 
    <div class="card-body"><form method="POST" id="voForm">
@@ -35,7 +35,7 @@
 
       <div class="field form-group">
          <label for="tagsFld">{%trans 'Category.tags'%}</label>
-         <textarea name="tags" id="tagsFld" class="form-control">{{target.tags|default:''}}</textarea>
+         <textarea name="tags" id="tagsFld" class="form-control">{{target.tagsString|default:''}}</textarea>
       </div>
 
       <div class="pnl-btns">
@@ -43,7 +43,7 @@
          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
       </div>
    </form></div>
-</div>{%endblock%}
+</div></div>{%endblock%}
 
 {%block loading%}{{block.super}}
 <script type="text/javascript"><!--

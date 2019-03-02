@@ -1,1 +1,20 @@
-{%extends TMPL_BASE%}{%load i18n%}
+{%extends TMPL_BASE%}{%load i18n django_tables2%}
+{%block title%}{%trans 'health.views.Dashboard'%}{%endblock%}
+
+{%block content%}<div class="jumbotron">
+
+   {%for c in target%}<div class="card widget" id="{{c.id}}">
+      <div class="card-header">{{c.name}}</div>
+      <div class="card-body"><i class="fas fa-spinner fa-spin"></i></div>
+   </div>{%endfor%}
+</div>{%endblock%}
+
+{%block loading%}{{block.super}}
+<script type="text/javascript"><!--
+$(document).ready(function(){
+   $('.widget[id]').each(function(){
+      $(this).find('.card-body').load('{%url "widget" id="__id__"%}'.replace('__id__', $(this).attr('id')), function(){ $(this).trigger('ready'); });
+   });
+});
+//--></script>
+{%endblock%}

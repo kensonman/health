@@ -19,7 +19,7 @@ logger=logging.getLogger('health.views')
 @login_required
 def dashboard(req):
    params=dict()
-   params['target']=CategoriesTbl(Category.objects.filter(user=req.user).order_by('sequence'))
+   params['target']=Category.objects.filter(user=req.user).order_by('sequence')
    return render(req, 'health/dashboard.html', params)
 
 # Showing the Categories
@@ -34,6 +34,8 @@ def categories(req):
 def category(req, id):
    params=dict()
    target=Category() if id=='new' else getObj(Category, id=id)
+   if not target.isNew():
+      if target.user != req.user: raise PermissionDenied()
 
    if req.method=='POST' or req.method=='PUT':
       #Check permission
@@ -66,3 +68,14 @@ def category(req, id):
 
    params['target']=target
    return render(req, 'health/category.html', params)
+
+@login_required
+def widget(req, id):
+   params=dict()
+   target=Category() if id=='new' else getObj(Category, id=id)
+   if not target.isNew():
+      if target.user != req.user: raise PermissionDenied()
+
+   params['target']=target
+   params['indexes']=IndexesTbl(Index.objects.filter(category=target).order_by('-time'))
+   return render(req, 'health/widget.html', params)

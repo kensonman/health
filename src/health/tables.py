@@ -15,3 +15,11 @@ class CategoriesTbl(Table):
       row_attrs={ 'oId': lambda record: record.id }
       fields=('id', 'name', 'lmb', 'lmd')
 
+class IndexesTbl(Table):
+   class Meta(object):
+      model=Index
+      attrs={'class': 'table'}
+      row_attrs={ 'oId': lambda record: record.id }
+      fields=('time', 'value', 'lmb', 'lmd')
+
+
