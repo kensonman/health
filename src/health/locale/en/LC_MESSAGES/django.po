@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-02 07:16+0000\n"
+"POT-Creation-Date: 2019-03-02 08:37+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -16,27 +16,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:20
+#: models.py:20 templates/health/category.html:2
+#: templates/health/category.html:5
 msgid "health.models.Category"
 msgstr "Category"
 
-#: models.py:21 templates/health/header.html:8
+#: models.py:21 templates/health/categories.html:2
+#: templates/health/categories.html:5 templates/health/header.html:8
 msgid "health.models.Categories"
 msgstr "Categories"
 
-#: models.py:23
+#: models.py:23 templates/health/category.html:12
 msgid "Category.name"
 msgstr "Name"
 
-#: models.py:24
+#: models.py:24 templates/health/category.html:17
 msgid "Category.desc"
 msgstr "Desc"
 
-#: models.py:25
+#: models.py:25 templates/health/category.html:22
 msgid "Category.minimum"
 msgstr "Minimum Standard"
 
-#: models.py:26
+#: models.py:26 templates/health/category.html:27
 msgid "Category.maximum"
 msgstr "Maximum Standard"
 
@@ -80,9 +82,19 @@ msgstr "Value"
 msgid "Index.tags"
 msgstr "Tags"
 
+#: templates/health/categories.html:2 templates/health/category.html:2
 #: templates/health/header.html:3
 msgid "appName"
 msgstr "Health"
+
+#: templates/health/categories.html:9 templates/health/category.html:2
+#: templates/health/category.html:5
+msgid "health.models.Category.create"
+msgstr "Create Category"
+
+#: templates/health/category.html:32
+msgid "actions.submit"
+msgstr "Submit"
 
 #: templates/health/header.html:7
 msgid "health.views.Dashboard"

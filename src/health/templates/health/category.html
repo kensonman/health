@@ -1,1 +1,44 @@
-{%extends TMPL_BASE%}
+{%extends TMPL_BASE%}{%load i18n django_tables2%}
+{%block title%}{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%} - {%trans 'appName'%}{%endblock%}
+
+{%block content%}<div class="jumbotron">
+   <h1 class="page-title">{%if target.isNew%}{%trans 'health.models.Category.create'%}{%else%}{{target.name}} - {%trans 'health.models.Category'%}{%endif%}</h1>
+
+   <form method="POST" id="voForm">
+      <input type="hidden" name="_method" value="POST"/>
+      {%csrf_token%}
+
+      <div class="field form-group">
+         <label for="nameFld">{%trans 'Category.name'%}</label>
+         <input type="text" name="name" id="nameFld" value="{{target.name|default:''}}" required="required" class="form-control"/>
+      </div>
+
+      <div class="field form-group">
+         <label for="descFld">{%trans 'Category.desc'%}</label>
+         <textarea name="desc" id="descFld" class="form-control">{{target.desc|default:''}}</textarea>
+      </div>
+
+      <div class="field form-group">
+         <label for="minimumFld">{%trans 'Category.minimum'%}</label>
+         <input type="number" name="minimum" id="minimumFld" value="{{target.minimum|default:'0'}}" required="required" class="form-control"/>
+      </div>
+
+      <div class="field form-group">
+         <label for="maximumFld">{%trans 'Category.maximum'%}</label>
+         <input type="number" name="maximum" id="maximumFld" value="{{target.maximum|default:'0'}}" required="required" class="form-control"/>
+      </div>
+
+      <div class="pnl-btns">
+         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
+      </div>
+   </form>
+
+</div>{%endblock%}
+
+{%block loading%}{{block.super}}
+<script type="text/javascript"><!--
+$(document).ready(function(){
+   $('#voForm').validate({});
+});
+//--></script>
+{%endblock%}
