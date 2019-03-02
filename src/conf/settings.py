@@ -1,3 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+# File:     conf/settings.py
+# Date:     2019-03-02 13:30
+# Author:   Kenson Man <kenson@kenson.idv.hk>
+# Desc:     Define the models for the health project;
 """
 Django settings for conf project.
 
@@ -112,9 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh_hant'
+LANGS=(('en', 'English'), ('zh-hant', '繁體中文'))
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Hong_Kong'
 
 USE_I18N = True
 
@@ -131,3 +138,6 @@ STATIC_ROOT= 'static'
 MEDIA_URL  = '/media/'
 MEDIA_ROOT = 'media'
 LOGIN_URL = 'webframe:login'
+
+# Templates
+TMPL_HEADER='health/header.html'
