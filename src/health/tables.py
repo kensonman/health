@@ -23,9 +23,7 @@ class IndexesTbl(Table):
       row_attrs={ 'oId': lambda record: record.id }
       fields=('time', 'value', 'tagsString')
 
+   tagsString=Column(verbose_name=_('Index.tags'))
+
    def render_value(self, record, value):
       return record.category.fmt.format(value)
-
-   tagsString=Column(verbose_name=_('Index.tagsString'))
-
-

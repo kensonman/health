@@ -55,4 +55,4 @@ class Index(ValueObject):
 
    @property
    def tagsString(self):
-      return ', '.join([t.name for t in self.tags])
+      return ', '.join([t.name for t in self.tags.all()])

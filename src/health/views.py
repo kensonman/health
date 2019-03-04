@@ -72,6 +72,7 @@ def category(req, id):
    return render(req, 'health/category.html', params)
 
 @login_required
+@transaction.atomic
 def widget(req, id):
    params=dict()
    target=Category() if id=='new' else getObj(Category, id=id)
@@ -86,6 +87,9 @@ def widget(req, id):
       index.time=getDateTime(req.POST.get('time', None), None, req.POST.get('FMT_DATETIME', FMT_DATETIME))
       index.value=float(req.POST.get('value', '0.0'))
       index.save()
+      for t in req.POST.get('tags', '').split(','):
+         t=Tag.objects.get(category=target, name=t.strip())
+         index.tags.add(t)
       return redirect('dashboard')
 
    params['target']=target
