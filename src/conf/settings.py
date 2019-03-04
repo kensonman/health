@@ -164,3 +164,5 @@ LOGGING={
      'health': {'handlers': ['console', 'file'], 'level': 'DEBUG'},
    },
 }
+
+VERSION='v0.1.0'
