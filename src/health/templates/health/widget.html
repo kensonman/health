@@ -1,5 +1,5 @@
 {%load i18n pydate pref django_tables2%}
-{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True as DateTimeFormat%}
+{%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
 <div class="row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
       {%render_table indexes%}
@@ -7,7 +7,7 @@
    <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
       {%csrf_token%}
       <input type="hidden" name="_method" value="POST"/>
-      <input type="hidden" name="FMT_DATETIME" value="{%pref 'FMT_DATETIME' defval='%Y-%m-%d %H:%M' returnValue=True%}"/>
+      <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
       <div class="field form-group">
          <div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
@@ -50,9 +50,9 @@ $('#{{target.id}}').bind('ready', function(){
       });
    });
    $('#{{target.id}}_form').validate();
-   $(this).find('.field-datetime').datetimepicker({'format': '{{DateTimeFormat}}'});
+   $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
    $(this).find('.btn-now').click(function(){
-      $(this).parents('.input-group').find('input:first').val(moment().format('{{DateTimeFormat}}'));
+      $(this).parents('.input-group').find('input:first').val(moment().format(pydatefmt('{{DateTimeFormat}}')));
    });
 });
 //--></script>

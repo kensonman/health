@@ -16,7 +16,7 @@ decval=5 #Decimal-Places
 defval=0 #Default-Value
 
 class Category(OrderableValueObject):
-   class META(object):
+   class Meta(object):
       verbose_name         =_('health.models.Category')
       verbose_name_plural  =_('health.models.Categories')
 
@@ -24,6 +24,7 @@ class Category(OrderableValueObject):
    desc                    =models.TextField(max_length=4096, null=True, blank=True, verbose_name=_('Category.desc'))
    minimum                 =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Category.minimum'))
    maximum                 =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Category.maximum'))
+   fmt                     =models.CharField(max_length=20, default='{}', verbose_name=_('Category.fmt'))
    user                    =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Category.user'))
 
    @property
@@ -35,7 +36,7 @@ class Category(OrderableValueObject):
       return ', '.join([t.name for t in self.tags])
 
 class Tag(ValueObject):
-   class META(object):
+   class Meta(object):
       verbose_name         =_('health.models.Tag')
       verbose_name_plural  =_('health.models.Tags')
 
@@ -43,7 +44,7 @@ class Tag(ValueObject):
    name                    =models.CharField(max_length=100, verbose_name=_('Tag.name'))
 
 class Index(ValueObject):
-   class META(object):
+   class Meta(object):
       verbose_name         =_('health.models.Index')
       verbose_name_plural  =_('health.models.Indexes')
 

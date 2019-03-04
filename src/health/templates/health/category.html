@@ -17,6 +17,11 @@
          <label for="descFld">{%trans 'Category.desc'%}</label>
          <textarea name="desc" id="descFld" class="form-control">{{target.desc|default:''}}</textarea>
       </div>
+
+      <div class="field form-group">
+         <label for="fmtFld">{%trans 'Category.fmt'%}</label>
+         <input type="text" name="fmt" id="fmtFld" value="{{target.fmt|default:''}}" required="required" class="form-control"/>
+      </div>
       
       <div class="field form-group">
          <label for="sequenceFld">{%trans 'Category.sequence'%}</label>

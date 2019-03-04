@@ -49,6 +49,7 @@ def category(req, id):
       target.desc=req.POST.get('desc', None)
       target.minimum=Decimal(req.POST.get('minimum', '0'))
       target.maximum=Decimal(req.POST.get('maximum', '0'))
+      target.fmt=req.POST.get('fmt', None)
       target.sequence=float(req.POST.get('sequence', '100'))
       target.user=req.user
       target.save()
@@ -82,7 +83,7 @@ def widget(req, id):
       if req.user != target.user: raise PermissionDenied('Cannot cross category/user')
       index=Index()
       index.category=target
-      index.time=getDateTime(req.POST.get('time', None), req.POST.get('FMT_DATETIME', FMT_DATETIME))
+      index.time=getDateTime(req.POST.get('time', None), None, req.POST.get('FMT_DATETIME', FMT_DATETIME))
       index.value=float(req.POST.get('value', '0.0'))
       index.save()
       return redirect('dashboard')

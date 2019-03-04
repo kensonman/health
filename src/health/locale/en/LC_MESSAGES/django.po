@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-04 08:05+0000\n"
+"POT-Creation-Date: 2019-03-04 12:40+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -34,55 +34,59 @@ msgstr "Name"
 msgid "Category.desc"
 msgstr "Desc"
 
-#: models.py:25 templates/health/category.html:27
+#: models.py:25 templates/health/category.html:32
 msgid "Category.minimum"
 msgstr "Minimum Standard"
 
-#: models.py:26 templates/health/category.html:32
+#: models.py:26 templates/health/category.html:37
 msgid "Category.maximum"
 msgstr "Maximum Standard"
 
-#: models.py:27
+#: models.py:27 templates/health/category.html:22
+msgid "Category.fmt"
+msgstr "Format"
+
+#: models.py:28
 msgid "Category.user"
 msgstr "User"
 
-#: models.py:39
+#: models.py:40
 msgid "health.models.Tag"
 msgstr "Tag"
 
-#: models.py:40
+#: models.py:41
 msgid "health.models.Tags"
 msgstr "Tags"
 
-#: models.py:42
+#: models.py:43
 msgid "Tag.category"
 msgstr "Category"
 
-#: models.py:43
+#: models.py:44
 msgid "Tag.name"
 msgstr "Name"
 
-#: models.py:47
+#: models.py:48
 msgid "health.models.Index"
 msgstr "Index"
 
-#: models.py:48
+#: models.py:49
 msgid "health.models.Indexes"
 msgstr "Indexes"
 
-#: models.py:50 templates/health/widget.html:11
+#: models.py:51 templates/health/widget.html:14
 msgid "Index.time"
 msgstr "Time"
 
-#: models.py:51
+#: models.py:52
 msgid "Index.category"
 msgstr "Category"
 
-#: models.py:52 templates/health/widget.html:18 templates/health/widget.html:19
+#: models.py:53 templates/health/widget.html:21
 msgid "Index.value"
 msgstr "Value"
 
-#: models.py:53 templates/health/widget.html:24
+#: models.py:54 templates/health/widget.html:26
 msgid "Index.tags"
 msgstr "Tags"
 
@@ -100,19 +104,19 @@ msgstr "Health"
 msgid "health.models.Category.create"
 msgstr "Create Category"
 
-#: templates/health/category.html:22
+#: templates/health/category.html:27
 msgid "Category.sequence"
 msgstr "Sequence"
 
-#: templates/health/category.html:37
+#: templates/health/category.html:42
 msgid "Category.tags"
 msgstr "Tags"
 
-#: templates/health/category.html:42
+#: templates/health/category.html:47
 msgid "actions.readonly"
 msgstr "Edit/ReadOnly"
 
-#: templates/health/category.html:43 templates/health/widget.html:30
+#: templates/health/category.html:48 templates/health/widget.html:32
 msgid "actions.submit"
 msgstr "Submit"
 
@@ -141,11 +145,7 @@ msgstr "Logout"
 msgid "login"
 msgstr "Login"
 
-#: templates/health/widget.html:12
-msgid "webframe.models.AliveObject.effDate"
-msgstr "Effective Date"
-
-#: templates/health/widget.html:13
+#: templates/health/widget.html:15
 msgid "now"
 msgstr "Now"
 
@@ -158,3 +158,6 @@ msgstr "%(objtype)s::%(target)s[%(id)s] saved successfully!"
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
 msgstr "%(objtype)s::%(target)s[%(id)s] deleted!"
+
+#~ msgid "webframe.models.AliveObject.effDate"
+#~ msgstr "Effective Date"
