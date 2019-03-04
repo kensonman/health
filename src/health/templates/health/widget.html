@@ -1,17 +1,23 @@
-{%load i18n pydate%}
+{%load i18n pydate pref django_tables2%}
 <div class="row">
-   <div class="col-12 col-md-8"><!-- Chart Here --></div>
-   <form class="col-12 col-md-4" method="POST" id="{{target.id}}">
-      <div class="field form-group"><div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
-         <label class="input-group-prepend input-group-text" for="timeFld">{%trans 'Index.time'%}</label>
-         <input type="text" class="form-control editable" required="required" name="time" id="timeFld" placeholder="{%trans 'webframe.models.AliveObject.effDate'%}" value="{{target.time|pydate:FMT_DATE}}"/>
-         <div class="input-group-append"><button class="btn btn-secondary btn-now" type="button" title="{%trans 'now'%}"><i class="fas fa-clock"></i> {%trans 'now'%}</button></div>
-      </div></div>
+   <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
+      {%render_table indexes%}
+   </div><!-- End of #{{target.id}}_detailPnl -->
+   <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
+      {%csrf_token%}
+      <input type="hidden" name="_method" value="POST"/>
+      <input type="hidden" name="FMT_DATETIME" value="{%pref 'FMT_DATETIME' defval='%Y-%m-%d %H:%M' returnValue=True%}"/>
+
+      <div class="field form-group">
+         <div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
+            <input type="text" class="form-control daettimepicker-input" required="required" name="time" id="timeFld" placeholder="{%trans 'Index.time'%}" data-target="#indexTimeField" data-toggle="datetimepicker"/>
+            <div class="input-group-append"><button class="btn btn-secondary btn-now" type="button" title="{%trans 'now'%}"><i class="fas fa-clock"></i></button></div>
+         </div>
+      </div>
 
       <div class="field form-group">
          <div class="input-group">
-            <label class="input-group-prepend input-group-text" for="valueFld">{%trans 'Index.value'%}</label>
-            <input type="text" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="0" number="number"/>
+            <input type="text" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="" number="number"/>
          </div>
       </div>
 
@@ -25,22 +31,24 @@
          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
       </div>
    </form>
-</div>
+</div><!-- end of row -->
 
 <script type="text/javascript"><!--
-$('.tagBtn').click(function(){
-   if($(this).attr('clicked')){
-      $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
-   }else{
-      $(this).removeClass('btn-outline-info').addClass('btn-info').attr('clicked', 'clicked');
-   }
-   $('input[name=tags]').val('');
-   $('.tagBtn[clicked]').each(function(){ 
-      var curr=$('input[name=tags]').val();
-      if(curr.length>0)curr+=', ';
-      $('input[name=tags]').val(curr+$(this).attr('value')); 
+$('#{{target.id}}').bind('ready', function(){
+   $('.tagBtn').click(function(){
+      if($(this).attr('clicked')){
+         $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
+      }else{
+         $(this).removeClass('btn-outline-info').addClass('btn-info').attr('clicked', 'clicked');
+      }
+      $('input[name=tags]').val('');
+      $('.tagBtn[clicked]').each(function(){ 
+         var curr=$('input[name=tags]').val();
+         if(curr.length>0)curr+=', ';
+         $('input[name=tags]').val(curr+$(this).attr('value')); 
+      });
    });
-});
-$('#{{target.id}}').validate({});
-$('.field-datetime').datetimepicker({'format': '{{FMT_JSDATE}}'});
+   $('#{{target.id}}_form').validate();
+   $('.field-datetime').datetimepicker({'format': '{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True%}'});
+}).trigger('ready');
 //--></script>

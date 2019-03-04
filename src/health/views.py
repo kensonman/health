@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404 as getObj
 from django.utils.translation import gettext_lazy as _
+from webframe.functions import FMT_DATETIME, getDateTime
 from .tables import *
 import logging
 
@@ -75,6 +76,16 @@ def widget(req, id):
    target=Category() if id=='new' else getObj(Category, id=id)
    if not target.isNew():
       if target.user != req.user: raise PermissionDenied()
+
+   if req.method=='POST':
+      if not req.user.has_perm('health.add_index'): raise PermissionDenied()
+      if req.user != target.user: raise PermissionDenied('Cannot cross category/user')
+      index=Index()
+      index.category=target
+      index.time=getDateTime(req.POST.get('time', None), req.POST.get('FMT_DATETIME', FMT_DATETIME))
+      index.value=float(req.POST.get('value', '0.0'))
+      index.save()
+      return redirect('dashboard')
 
    params['target']=target
    params['indexes']=IndexesTbl(Index.objects.filter(category=target).order_by('-time'))

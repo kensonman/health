@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-02 09:16+0000\n"
+"POT-Creation-Date: 2019-03-04 08:05+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: TChinese\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5 views.py:50 views.py:55
+#: templates/health/category.html:5 views.py:62 views.py:67
 msgid "health.models.Category"
 msgstr "類別"
 
@@ -46,40 +46,48 @@ msgstr "標準最高值"
 msgid "Category.user"
 msgstr "擁有者"
 
-#: models.py:31
+#: models.py:39
 msgid "health.models.Tag"
 msgstr "標籤"
 
-#: models.py:32 templates/health/header.html:9
+#: models.py:40
 msgid "health.models.Tags"
 msgstr "標籤"
 
-#: models.py:34
+#: models.py:42
 msgid "Tag.category"
 msgstr "所屬類別"
 
-#: models.py:35
+#: models.py:43
 msgid "Tag.name"
 msgstr "標籤名稱"
 
-#: models.py:39
+#: models.py:47
 msgid "health.models.Index"
 msgstr "指數"
 
-#: models.py:40
+#: models.py:48
 msgid "health.models.Indexes"
 msgstr "指數"
 
-#: models.py:43
+#: models.py:50 templates/health/widget.html:11
+msgid "Index.time"
+msgstr "時間"
+
+#: models.py:51
 msgid "Index.category"
 msgstr "所屬類別"
 
-#: models.py:44
+#: models.py:52 templates/health/widget.html:18 templates/health/widget.html:19
 msgid "Index.value"
 msgstr "數值"
 
-#: models.py:45
+#: models.py:53 templates/health/widget.html:24
 msgid "Index.tags"
+msgstr "標籤"
+
+#: tables.py:26
+msgid "Index.tagsString"
 msgstr "標籤"
 
 #: templates/health/categories.html:2 templates/health/category.html:2
@@ -97,40 +105,56 @@ msgid "Category.sequence"
 msgstr "排序"
 
 #: templates/health/category.html:37
+msgid "Category.tags"
+msgstr "標籤"
+
+#: templates/health/category.html:42
+msgid "actions.readonly"
+msgstr "編輯/唯讀"
+
+#: templates/health/category.html:43 templates/health/widget.html:30
 msgid "actions.submit"
 msgstr "儲存"
 
-#: templates/health/header.html:7
+#: templates/health/dashboard.html:2 templates/health/header.html:7
 msgid "health.views.Dashboard"
 msgstr "主頁"
 
-#: templates/health/header.html:22
+#: templates/health/header.html:21
 msgid "users"
 msgstr "使用者"
 
-#: templates/health/header.html:25 templates/health/header.html:31
+#: templates/health/header.html:24 templates/health/header.html:30
 #, python-format
 msgid "Hi, %(username)s"
 msgstr "你好, %(username)s"
 
-#: templates/health/header.html:28
+#: templates/health/header.html:27
 msgid "preferences"
 msgstr "喜好設定"
 
-#: templates/health/header.html:29
+#: templates/health/header.html:28
 msgid "logout"
 msgstr "登出"
 
-#: templates/health/header.html:33
+#: templates/health/header.html:32
 msgid "login"
 msgstr "登入"
 
-#: views.py:50
+#: templates/health/widget.html:12
+msgid "webframe.models.AliveObject.effDate"
+msgstr "有効日期"
+
+#: templates/health/widget.html:13
+msgid "now"
+msgstr "現在"
+
+#: views.py:62
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] saved"
-msgstr ""
+msgstr "已儲存: %(objtype)s::%(target)s[%(id)s]!"
 
-#: views.py:55
+#: views.py:67
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
-msgstr ""
+msgstr "已刪除: %(objtype)s::%(target)s[%(id)s]!"

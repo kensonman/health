@@ -47,7 +47,11 @@ class Index(ValueObject):
       verbose_name         =_('health.models.Index')
       verbose_name_plural  =_('health.models.Indexes')
 
-   time                    =models.DateTimeField(default=tz.now, verbose_name=('Index.time'))
+   time                    =models.DateTimeField(default=tz.now, verbose_name=_('Index.time'))
    category                =models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name=_('Index.category'))
    value                   =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Index.value'))
    tags                    =models.ManyToManyField(Tag, verbose_name=_('Index.tags'))
+
+   @property
+   def tagsString(self):
+      return ', '.join([t.name for t in self.tags])

@@ -5,6 +5,7 @@
 # Author:   Kenson Man <kenson@kenson.idv.hk>
 # Desc:     Define the models for the health project;
 from django_tables2 import Table, Column, A, TemplateColumn 
+from django.utils.translation import gettext_lazy as _
 from webframe.CurrentUserMiddleware import get_current_request
 from .models import *
 
@@ -20,6 +21,8 @@ class IndexesTbl(Table):
       model=Index
       attrs={'class': 'table'}
       row_attrs={ 'oId': lambda record: record.id }
-      fields=('time', 'value', 'lmb', 'lmd')
+      fields=('time', 'value', 'tagsString')
+
+   tagsString=Column(verbose_name=_('Index.tagsString'))
 
 
