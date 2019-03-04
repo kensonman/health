@@ -49,6 +49,6 @@ $('#{{target.id}}').bind('ready', function(){
       });
    });
    $('#{{target.id}}_form').validate();
-   $('.field-datetime').datetimepicker({'format': '{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True%}'});
-}).trigger('ready');
+   $(this).find('.field-datetime').datetimepicker({'format': '{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True%}'});
+});
 //--></script>
