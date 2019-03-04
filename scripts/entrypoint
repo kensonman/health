@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+# The entrypoint of the container.
+
+CWD="/usr/src/app"
+REQUIREMENTS=${REQUIREMENTS:-/usr/src/app/requirements.txt}
+USERID=${UID:-1000}
+
+# Init the django environments
+init()
+{
+   echo "Going to init the container..."
+   if [ -f ${REQUIREMENTS} ]; then
+      pip install -r ${REQUIREMENTS}
+      pip freeze > ${REQUIREMENTS}
+   fi
+}
+
+run()
+{
+   init
+   echo "Going to execute the server ...."
+   /usr/bin/supervisord -c /scripts/supervisord.conf
+}
+
+cmd()
+{
+   init
+   echo "Going to execute the Django command...."
+   cd ${CWD}
+
+   ./manage.py ${*:2}
+}
+
+ctl()
+{
+   echo "Going to execute the supervisorctl command: \"$@\"..."
+   supervisorctl -c /scripts/supervisord.conf ${*:2}
+}
+
+printhelp()
+{
+   echo "This entrypoint support belows commands:"
+   echo "  init             - Init the Django environment and install the dependencies;"
+   echo "    Usage: init"
+   echo "  run              - Startup the service with supervisor daemon;"
+   echo "    Usage: run"
+   echo "  status           - Showing the status of supervisord;"
+   echo "    Usage: status"
+   echo "  ctl              - Execute the [supervisorctl command](http://supervisord.org/running.html#running-supervisorctl);"
+   echo "    Usage: ctl <action> <program>"
+   echo "  exec             - Execute the specific Django command by prepend ./manage.py"
+   echo "    Usage: exec <cmd>"
+   echo "  help             - Print this help message"
+   echo "    Usage: help"
+}
+
+
+case "$1" in
+   init)
+      init "$@"
+      ;;
+   run)
+      run "$@"
+      ;;
+   ctl)
+      ctl "$@"
+      ;;
+   status)
+      ctl "status"
+      ;;
+   exec)
+      cmd "$@"
+      ;;
+   help)
+      printhelp
+      ;;
+   *)
+      echo "Executing runtime command \"$@\"..."
+      exec "$@"
+esac
