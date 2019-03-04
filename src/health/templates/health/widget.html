@@ -1,4 +1,5 @@
 {%load i18n pydate pref django_tables2%}
+{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True as DateTimeFormat%}
 <div class="row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
       {%render_table indexes%}
@@ -49,6 +50,9 @@ $('#{{target.id}}').bind('ready', function(){
       });
    });
    $('#{{target.id}}_form').validate();
-   $(this).find('.field-datetime').datetimepicker({'format': '{%pref "FMT_JSDATETIME" defval="YYYY-MM-DD HH:mm" returnValue=True%}'});
+   $(this).find('.field-datetime').datetimepicker({'format': '{{DateTimeFormat}}'});
+   $(this).find('.btn-now').click(function(){
+      $(this).parents('.input-group').find('input:first').val(moment().format('{{DateTimeFormat}}'));
+   });
 });
 //--></script>
