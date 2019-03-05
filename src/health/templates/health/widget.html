@@ -1,13 +1,18 @@
 {%load i18n pydate pref django_tables2%}
 {%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
-<div class="row">
+{%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
+<div class="row" id="{{target.id}}_row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
-      {%render_table indexes%}
+      {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
+      <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
+      {%render_table table%}
    </div><!-- End of #{{target.id}}_detailPnl -->
    <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
       {%csrf_token%}
       <input type="hidden" name="_method" value="POST"/>
       <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
+
+      <h3>{%trans 'actions.new-record'%}</h3>
 
       <div class="field form-group">
          <div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
@@ -22,14 +27,16 @@
          </div>
       </div>
 
+      {%if target.tags%}
       <div class="field form-group">
          <label for="tagsFld">{%trans 'Index.tags'%}</label>
          <input type="hidden" name="tags" value=""/>
          <div>{%for t in target.tags%}<button type="button" class="btn btn-outline-info tagBtn" value="{{t.name}}">{{t.name}}</button>{%endfor%}</div>
       </div>
+      {%endif%}
 
       <div class="pnl-btns">
-         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
+         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.new-record'%}</button>
       </div>
    </form>
 </div><!-- end of row -->
@@ -53,6 +60,37 @@ $('#{{target.id}}').bind('ready', function(){
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
    $(this).find('.btn-now').click(function(){
       $(this).parents('.input-group').find('input:first').val(moment().format(pydatefmt('{{DateTimeFormat}}')));
+   });
+   $(this).find('.page-link').click(function(ev){
+      ev.preventDefault();
+      var url='{%url "widget" id="__id__"%}'.replace('__id__', '{{target.id}}')+$(this).attr('href');
+      $('#{{target.id}}').find('.card-body:first')
+         .empty()
+         .html('<i class="fas fa-spinner fa-spin"></i>')
+         .load(url, function(){ $(this).trigger('ready'); });
+   });
+
+   var chart=new Chart($('#{{target.id}}_chart'), {
+      type: 'line',
+      data: {
+         labels: [{%for i in indexes reversed%}'{{i.time|pydate:ShortDateTimeFormat}}',{%endfor%}],
+         datasets: [{
+            data: [{%for i in indexes reversed%}{{i.value}},{%endfor%}],
+         }],
+         //{%if target.mimimum != target.maximum%}
+         yHighlightRange: { begin: {{target.minimum}}, end: {{target.maximum}}, fill: 'rgba(0, 255, 0, 0.3)'},
+         //{%endif%}
+      },
+      options: {
+         legend: {display: false,},
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero:true
+               }
+            }]
+         },
+      },
    });
 });
 //--></script>

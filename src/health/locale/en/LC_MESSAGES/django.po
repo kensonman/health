@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-04 12:40+0000\n"
+"POT-Creation-Date: 2019-03-05 13:37+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -16,8 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: admin.py:21 admin.py:33 models.py:28
+msgid "Category.user"
+msgstr "User"
+
+#: admin.py:25 admin.py:37 models.py:23 templates/health/category.html:12
+msgid "Category.name"
+msgstr "Name"
+
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5 views.py:62 views.py:67
+#: templates/health/category.html:5 views.py:63 views.py:68
 msgid "health.models.Category"
 msgstr "Category"
 
@@ -25,10 +33,6 @@ msgstr "Category"
 #: templates/health/categories.html:5 templates/health/header.html:8
 msgid "health.models.Categories"
 msgstr "Categories"
-
-#: models.py:23 templates/health/category.html:12
-msgid "Category.name"
-msgstr "Name"
 
 #: models.py:24 templates/health/category.html:17
 msgid "Category.desc"
@@ -45,10 +49,6 @@ msgstr "Maximum Standard"
 #: models.py:27 templates/health/category.html:22
 msgid "Category.fmt"
 msgstr "Format"
-
-#: models.py:28
-msgid "Category.user"
-msgstr "User"
 
 #: models.py:40
 msgid "health.models.Tag"
@@ -74,7 +74,7 @@ msgstr "Index"
 msgid "health.models.Indexes"
 msgstr "Indexes"
 
-#: models.py:51 templates/health/widget.html:14
+#: models.py:51 templates/health/widget.html:19
 msgid "Index.time"
 msgstr "Time"
 
@@ -82,16 +82,12 @@ msgstr "Time"
 msgid "Index.category"
 msgstr "Category"
 
-#: models.py:53 templates/health/widget.html:21
+#: models.py:53 templates/health/widget.html:26
 msgid "Index.value"
 msgstr "Value"
 
-#: models.py:54 templates/health/widget.html:26
+#: models.py:54 tables.py:27 templates/health/widget.html:32
 msgid "Index.tags"
-msgstr "Tags"
-
-#: tables.py:26
-msgid "Index.tagsString"
 msgstr "Tags"
 
 #: templates/health/categories.html:2 templates/health/category.html:2
@@ -116,7 +112,7 @@ msgstr "Tags"
 msgid "actions.readonly"
 msgstr "Edit/ReadOnly"
 
-#: templates/health/category.html:48 templates/health/widget.html:32
+#: templates/health/category.html:48
 msgid "actions.submit"
 msgstr "Submit"
 
@@ -145,19 +141,26 @@ msgstr "Logout"
 msgid "login"
 msgstr "Login"
 
-#: templates/health/widget.html:15
+#: templates/health/widget.html:15 templates/health/widget.html:39
+msgid "actions.new-record"
+msgstr "New Record"
+
+#: templates/health/widget.html:20
 msgid "now"
 msgstr "Now"
 
-#: views.py:62
+#: views.py:63
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] saved"
 msgstr "%(objtype)s::%(target)s[%(id)s] saved successfully!"
 
-#: views.py:67
+#: views.py:68
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
 msgstr "%(objtype)s::%(target)s[%(id)s] deleted!"
+
+#~ msgid "Index.tagsString"
+#~ msgstr "Tags"
 
 #~ msgid "webframe.models.AliveObject.effDate"
 #~ msgstr "Effective Date"

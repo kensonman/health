@@ -1,4 +1,4 @@
-{%extends TMPL_BASE%}{%load i18n django_tables2%}
+{%extends TMPL_BASE%}{%load i18n django_tables2 static%}
 {%block title%}{%trans 'health.views.Dashboard'%}{%endblock%}
 
 {%block content%}<div class="jumbotron">
@@ -10,11 +10,16 @@
 </div>{%endblock%}
 
 {%block loading%}{{block.super}}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="{%static 'js/extendedLineChart.js'%}"></script>
 <script type="text/javascript"><!--
 $(document).ready(function(){
    $('.widget[id]').each(function(){
       $(this).find('.card-body').load('{%url "widget" id="__id__"%}'.replace('__id__', $(this).attr('id')), function(){ $(this).trigger('ready'); });
    });
+   //Anchor{%if anchor%}
+   $.scrollTo('#{{anchor}}');
+   //{%endif%}End of Anchor
 });
 //--></script>
 {%endblock%}

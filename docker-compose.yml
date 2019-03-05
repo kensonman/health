@@ -13,6 +13,8 @@ services:
    app:
       image: kensonman/python:latest
       container_name: "${DOMAIN}.app"
+      env_file:
+         - .env
       ports: 
          - 8000:8000
       volumes:

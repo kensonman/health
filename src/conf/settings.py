@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'health', #os.environ.get('DBNAME', 'health')
-        'USER': 'health',
-        'PASSWORD': 'tpCHZWhey5SLnFce2KbdKez4aGBzSMhd',
-        'HOST': 'dbhost',
+        'NAME': os.environ.get('DBNAME', 'health'), 
+        'USER': os.environ.get('DBUSER', 'health'),
+        'PASSWORD': os.environ.get('DBPASS', 'healthpass'),
+        'HOST': os.environ.get('DBHOST', 'dbhost'),
     }
 }
 
@@ -145,6 +145,7 @@ LOGIN_URL = 'webframe:login'
 
 # Templates
 TMPL_HEADER='health/header.html'
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 
 # Logging
 if not os.path.isdir('logs'): os.mkdir('logs')
@@ -166,4 +167,4 @@ LOGGING={
    },
 }
 
-VERSION='v0.1.0'
+VERSION='v0.2.0'
