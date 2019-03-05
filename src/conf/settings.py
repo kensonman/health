@@ -91,10 +91,10 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'health', #os.environ.get('DBNAME', 'health')
-        'USER': 'health',
-        'PASSWORD': 'tpCHZWhey5SLnFce2KbdKez4aGBzSMhd',
-        'HOST': 'dbhost',
+        'NAME': os.environ.get('DBNAME', 'health'), 
+        'USER': os.environ.get('DBUSER', 'health'),
+        'PASSWORD': os.environ.get('DBPASS', 'healthpass'),
+        'HOST': os.environ.get('DBHOST', 'dbhost'),
     }
 }
 
