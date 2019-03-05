@@ -2,6 +2,7 @@
 {%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
 <div class="row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
+      {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
       {%render_table indexes%}
    </div><!-- End of #{{target.id}}_detailPnl -->
    <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
@@ -22,11 +23,13 @@
          </div>
       </div>
 
+      {%if target.tags%}
       <div class="field form-group">
          <label for="tagsFld">{%trans 'Index.tags'%}</label>
          <input type="hidden" name="tags" value=""/>
          <div>{%for t in target.tags%}<button type="button" class="btn btn-outline-info tagBtn" value="{{t.name}}">{{t.name}}</button>{%endfor%}</div>
       </div>
+      {%endif%}
 
       <div class="pnl-btns">
          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
