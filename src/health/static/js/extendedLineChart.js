@@ -23,10 +23,15 @@ Chart.helpers.extend(Chart.controllers.line.prototype, {
       ctx.save();
 
       // The fill style of the rectangle we are about to fill.
-      ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
+      ctx.fillStyle = (yHighlightRange.fill==undefined)?'rgba(0, 255, 0, 0.3)':yHighlightRange.fill;
       // Fill the rectangle that represents the highlight region. The parameters are the closest-to-starting-point pixel's x-coordinate,
       // the closest-to-starting-point pixel's y-coordinate, the width of the rectangle in pixels, and the height of the rectangle in pixels, respectively.
-      ctx.fillRect(xaxis.left, Math.min(yRangeBeginPixel, yRangeEndPixel), xaxis.right - xaxis.left, Math.max(yRangeBeginPixel, yRangeEndPixel) - Math.min(yRangeBeginPixel, yRangeEndPixel));
+      var x=xaxis.left;
+      var y=Math.min(yRangeBeginPixel, yRangeEndPixel);
+      var width=xaxis.right-xaxis.left;
+      var height=Math.max(yRangeBeginPixel, yRangeEndPixel)-Math.min(yRangeBeginPixel, yRangeEndPixel);
+      //ctx.fillRect(xaxis.left, Math.min(yRangeBeginPixel, yRangeEndPixel), xaxis.right - xaxis.left, Math.max(yRangeBeginPixel, yRangeEndPixel) - Math.min(yRangeBeginPixel, yRangeEndPixel));
+      ctx.fillRect(x, y, width, height);
 
       ctx.restore();
     }

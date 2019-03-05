@@ -88,6 +88,7 @@ def widget(req, id):
       index.value=float(req.POST.get('value', '0.0'))
       index.save()
       for t in req.POST.get('tags', '').split(','):
+         if len(t.strip())<1: continue
          t=Tag.objects.get(category=target, name=t.strip())
          index.tags.add(t)
       return redirect('dashboard')
