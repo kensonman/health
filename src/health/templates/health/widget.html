@@ -68,6 +68,7 @@ $('#{{target.id}}').bind('ready', function(){
             data: [{%for i in indexes reversed%}{{i.value}},{%endfor%}],
          }],
       },
+      yHighlightRange: { begin: 4, begin: 7 },
       options: {
          legend: {display: false,},
       },
