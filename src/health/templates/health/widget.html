@@ -1,9 +1,11 @@
 {%load i18n pydate pref django_tables2%}
 {%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
+{%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
 <div class="row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
       {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
-      {%render_table indexes%}
+      <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
+      {%render_table table%}
    </div><!-- End of #{{target.id}}_detailPnl -->
    <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
       {%csrf_token%}
@@ -56,6 +58,19 @@ $('#{{target.id}}').bind('ready', function(){
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
    $(this).find('.btn-now').click(function(){
       $(this).parents('.input-group').find('input:first').val(moment().format(pydatefmt('{{DateTimeFormat}}')));
+   });
+
+   var chart=new Chart($('#{{target.id}}_chart'), {
+      type: 'line',
+      data: {
+         labels: [{%for i in indexes%}'{{i.time|pydate:ShortDateTimeFormat}}',{%endfor%}],
+         datasets: [{
+            data: [{%for i in indexes%}{{i.value}},{%endfor%}],
+         }],
+      },
+      options: {
+         legend: {display: false,},
+      },
    });
 });
 //--></script>

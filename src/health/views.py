@@ -93,5 +93,6 @@ def widget(req, id):
       return redirect('dashboard')
 
    params['target']=target
-   params['indexes']=IndexesTbl(Index.objects.filter(category=target).order_by('-time'))
+   params['indexes']=Index.objects.filter(category=target).order_by('-time');
+   params['table']=IndexesTbl(params['indexes'])
    return render(req, 'health/widget.html', params)
