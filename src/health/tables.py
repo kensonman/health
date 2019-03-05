@@ -21,7 +21,7 @@ class IndexesTbl(Table):
    class Meta(object):
       model=Index
       attrs={'class': 'table'}
-      row_attrs={ 'oId': lambda record: record.id }
+      row_attrs={ 'oId': lambda record: record.id, 'class':'row-data' }
       fields=('time', 'value', 'tagsString')
 
    tagsString=Column(verbose_name=_('Index.tags'))

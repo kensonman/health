@@ -144,6 +144,7 @@ LOGIN_URL = 'webframe:login'
 
 # Templates
 TMPL_HEADER='health/header.html'
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
 
 # Logging
 if not os.path.isdir('logs'): os.mkdir('logs')

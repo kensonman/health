@@ -1,3 +1,8 @@
+// File:    health/static/js/extendedLineChart.js
+// Date:    2019-03-05 21:44
+// Author:  Kenson Man <kenson@kenson.idv.hk>
+// Desc:    According to [JSFiddle](https://jsfiddle.net/742zut83/22/), extend the LineChart in ChartJS for drawing the highlight-range.
+
 // The original draw function for the line chart. This will be applied after we have drawn our highlight range (as a rectangle behind the line chart).
 var originalLineDraw = Chart.controllers.line.prototype.draw;
 // Extend the line chart, in order to override the draw function.

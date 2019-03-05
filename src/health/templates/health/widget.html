@@ -61,6 +61,14 @@ $('#{{target.id}}').bind('ready', function(){
    $(this).find('.btn-now').click(function(){
       $(this).parents('.input-group').find('input:first').val(moment().format(pydatefmt('{{DateTimeFormat}}')));
    });
+   $(this).find('.page-link').click(function(ev){
+      ev.preventDefault();
+      var url='{%url "widget" id="__id__"%}'.replace('__id__', '{{target.id}}')+$(this).attr('href');
+      $('#{{target.id}}').find('.card-body:first')
+         .empty()
+         .html('<i class="fas fa-spinner fa-spin"></i>')
+         .load(url, function(){ $(this).trigger('ready'); });
+   });
 
    var chart=new Chart($('#{{target.id}}_chart'), {
       type: 'line',
@@ -75,6 +83,13 @@ $('#{{target.id}}').bind('ready', function(){
       },
       options: {
          legend: {display: false,},
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero:true
+               }
+            }]
+         },
       },
    });
 });
