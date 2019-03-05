@@ -12,6 +12,8 @@
       <input type="hidden" name="_method" value="POST"/>
       <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
+      <h3>{%trans 'actions.new-record'%}</h3>
+
       <div class="field form-group">
          <div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
             <input type="text" class="form-control daettimepicker-input" required="required" name="time" id="timeFld" placeholder="{%trans 'Index.time'%}" data-target="#indexTimeField" data-toggle="datetimepicker"/>
@@ -34,7 +36,7 @@
       {%endif%}
 
       <div class="pnl-btns">
-         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.submit'%}</button>
+         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.new-record'%}</button>
       </div>
    </form>
 </div><!-- end of row -->
