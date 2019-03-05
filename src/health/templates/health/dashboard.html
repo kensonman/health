@@ -16,6 +16,9 @@ $(document).ready(function(){
    $('.widget[id]').each(function(){
       $(this).find('.card-body').load('{%url "widget" id="__id__"%}'.replace('__id__', $(this).attr('id')), function(){ $(this).trigger('ready'); });
    });
+   //Anchor{%if anchor%}
+   $.scrollTo('#{{anchor}}');
+   //{%endif%}End of Anchor
 });
 //--></script>
 {%endblock%}

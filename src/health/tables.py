@@ -7,6 +7,7 @@
 from django_tables2 import Table, Column, A, TemplateColumn 
 from django.utils.translation import gettext_lazy as _
 from webframe.CurrentUserMiddleware import get_current_request
+from webframe.models import Preference
 from .models import *
 
 class CategoriesTbl(Table):
@@ -24,6 +25,9 @@ class IndexesTbl(Table):
       fields=('time', 'value', 'tagsString')
 
    tagsString=Column(verbose_name=_('Index.tags'))
+
+   def render_time(self, value):
+      return value.strftime(Preference.objects.pref('FMT_DATETIME', user=get_current_request().user, defval='%Y-%m-%d %H:%M', returnValue=True))
 
    def render_value(self, record, value):
       return record.category.fmt.format(value)
