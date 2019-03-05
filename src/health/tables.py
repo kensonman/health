@@ -24,6 +24,7 @@ class IndexesTbl(Table):
       fields=('time', 'value', 'tagsString')
 
    tagsString=Column(verbose_name=_('Index.tags'))
+   value=Column(attrs={'style': 'text-align: right'})
 
    def render_value(self, record, value):
       return record.category.fmt.format(value)
