@@ -63,9 +63,9 @@ $('#{{target.id}}').bind('ready', function(){
    var chart=new Chart($('#{{target.id}}_chart'), {
       type: 'line',
       data: {
-         labels: [{%for i in indexes%}'{{i.time|pydate:ShortDateTimeFormat}}',{%endfor%}],
+         labels: [{%for i in indexes reversed%}'{{i.time|pydate:ShortDateTimeFormat}}',{%endfor%}],
          datasets: [{
-            data: [{%for i in indexes%}{{i.value}},{%endfor%}],
+            data: [{%for i in indexes reversed%}{{i.value}},{%endfor%}],
          }],
       },
       options: {
