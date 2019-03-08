@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 14:41+0000\n"
+"POT-Creation-Date: 2019-03-08 15:50+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -50,7 +50,7 @@ msgstr "Maximum Standard"
 msgid "Category.fmt"
 msgstr "Format"
 
-#: models.py:40 templates/health/widget.html:13
+#: models.py:40
 msgid "health.models.Tag"
 msgstr "Tag"
 
@@ -74,7 +74,7 @@ msgstr "Index"
 msgid "health.models.Indexes"
 msgstr "Indexes"
 
-#: models.py:51 templates/health/widget.html:51
+#: models.py:51 templates/health/widget.html:60
 msgid "Index.time"
 msgstr "Time"
 
@@ -82,11 +82,12 @@ msgstr "Time"
 msgid "Index.category"
 msgstr "Category"
 
-#: models.py:53 templates/health/widget.html:58
+#: models.py:53 templates/health/widget.html:67
 msgid "Index.value"
 msgstr "Value"
 
-#: models.py:54 tables.py:29 templates/health/widget.html:64
+#: models.py:54 tables.py:29 templates/health/widget.html:22
+#: templates/health/widget.html:72
 msgid "Index.tags"
 msgstr "Tags"
 
@@ -141,23 +142,27 @@ msgstr "Logout"
 msgid "login"
 msgstr "Login"
 
-#: templates/health/widget.html:10
+#: templates/health/widget.html:19 templates/health/widget.html:45
 msgid "actions.filter"
 msgstr "Filter"
 
-#: templates/health/widget.html:21 templates/health/widget.html:22
+#: templates/health/widget.html:31 templates/health/widget.html:32
 msgid "views.widget.form"
 msgstr "From"
 
-#: templates/health/widget.html:28 templates/health/widget.html:29
+#: templates/health/widget.html:38 templates/health/widget.html:39
 msgid "views.widget.to"
 msgstr "To"
 
-#: templates/health/widget.html:47 templates/health/widget.html:71
+#: templates/health/widget.html:44
+msgid "actions.reset"
+msgstr "Reset"
+
+#: templates/health/widget.html:55 templates/health/widget.html:80
 msgid "actions.new-record"
 msgstr "New Record"
 
-#: templates/health/widget.html:52
+#: templates/health/widget.html:61
 msgid "now"
 msgstr "Now"
 

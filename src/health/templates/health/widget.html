@@ -41,6 +41,7 @@
             </div>
 
             <div class="pnl-btns">
+               <button type="reset" class="btn btn-warning btn-clear"><i class="fas fa-undo"></i> {%trans 'actions.reset'%}</button>
                <button type="submit" class="btn btn-success"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</button>
             </div>
          </div>
@@ -91,7 +92,7 @@ $('#{{target.id}}').bind('ready', function(){
       if($(this).attr('clicked')==undefined)
          $(this).removeClass('btn-outline-info').addClass('btn-info').attr('clicked', 'clicked');
       else
-         $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
+         $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked');
       $('#{{target.id}}').find('input[name=tags]').val($('#{{target.id}}').find('.btn-tag[clicked=clicked]').map(function(){return $(this).attr('value');}).get().join());
    });
    $('#{{target.id}}_form').validate();
@@ -100,8 +101,15 @@ $('#{{target.id}}').bind('ready', function(){
       if($(this).attr('clicked')==undefined)
          $(this).removeClass('btn-outline-success').addClass('btn-success').attr('clicked', 'clicked');
       else
-         $(this).removeClass('btn-success').addClass('btn-outline-success').removeAttr('clicked', 'clicked');
+         $(this).removeClass('btn-success').addClass('btn-outline-success').removeAttr('clicked');
       $('#{{target.id}}').find('input[name=filter]').val($('#{{target.id}}').find('.btn-filter[clicked=clicked]').map(function(){return $(this).attr('value');}).get().join());
+   });
+   $('#{{target.id}}_filterFrm .btn-clear').click(function(ev){
+      ev.preventDefault();
+      $('#{{target.id}}_filterFrm')
+         .find('.btn-filter').removeClass('btn-success').addClass('btn-outline-success').removeAttr('clicked').end()
+         .find('input:visible').val('').end()
+      ;
    });
    $('#{{target.id}}_filterFrm').submit(function(ev){
       ev.preventDefault();
