@@ -13,6 +13,7 @@ RUN echo ">>   Installing dependancies..." \
  && apk update \
  && apk upgrade \
  && apk add --update --no-cache bash gettext build-base postgresql-dev jpeg-dev nginx supervisor zlib-dev uwsgi-python3 vim linux-headers \
+ && pip install --upgrade pip \
  && adduser -S thisuser \
  && mkdir -p /scripts \
  && mkdir -p ${WDIR}/logs \
@@ -28,6 +29,7 @@ RUN echo ">>   Configurating ..." \
  && chmod +x /scripts/entrypoint \
  && pip install uwsgi \
  && pip install -r ${WDIR}/requirements.txt \
+ && cd ${WDIR} \
  && ${WDIR}/manage.py collectstatic --no-input \
  && chown -R thisuser:www-data ${WDIR} \
  && ln -s /scripts/entrypoint /usr/bin/entrypoint \
