@@ -3,9 +3,18 @@
 {%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
 <div class="row" id="{{target.id}}_row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
-      {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
-      <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
-      {%render_table table%}
+      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm">
+         {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
+         <input type="hidden" name="filter" value="{{filter}}"/>
+         <div class="pnl-tags input-group btn-group">
+            <div class="input-group-prepend input-group-text"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
+            {%for t in target.tags%}
+               <button type="button" class="btn btn-outline-success btn-filter" value="{{t.name}}">{{t.name}}</button>
+            {%endfor%}
+         </div>
+         <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
+         {%render_table table%}
+      </form>
    </div><!-- End of #{{target.id}}_detailPnl -->
    <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
       {%csrf_token%}
@@ -23,7 +32,7 @@
 
       <div class="field form-group">
          <div class="input-group">
-            <input type="text" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="" number="number"/>
+            <input type="number" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="" number="number"/>
          </div>
       </div>
 
@@ -43,6 +52,8 @@
 
 <script type="text/javascript"><!--
 $('#{{target.id}}').bind('ready', function(){
+   $(this).unbind('ready');
+   //TagBtn
    $('.tagBtn').click(function(){
       if($(this).attr('clicked')){
          $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
@@ -57,10 +68,34 @@ $('#{{target.id}}').bind('ready', function(){
       });
    });
    $('#{{target.id}}_form').validate();
+   //Handling filter
+   $(this).find('.btn-filter').click(function(){
+      if($(this).attr('checked')==undefined)
+         $(this).attr('checked', 'checked').removeClass('btn-outline-success').addClass('btn-success');
+      else
+         $(this).removeAttr('checked').removeClass('btn-success').addClass('btn-outline-success');
+      $('#{{target.id}}').find('input[name=filter]').val($('#{{target.id}}').find('.btn-filter[checked=checked]').map(function(){return $(this).attr('value');}).get().join());
+      $('#{{target.id}}').find('#{{target.id}}_filterFrm').hide().after('<i class="fas fa-spinner fa-spin"></i>').ajaxSubmit({
+         target: '#{{target.id}} > .card-body', 
+         success: function(){ $('#{{target.id}}').trigger('ready');},
+      });
+   });
+   var filter=$(this).find('input[name=filter]').val().split(',');
+   for(var i=0; i<filter.length; i++){
+      var f=filter[i].trim();
+      if(f.length<1)continue;
+      $(this).find('.btn-filter[value='+f+']').removeClass('btn-outline-success').addClass('btn-success').attr('checked', 'checked');
+   }
+
+   //Init Datetime-Picker
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
+
+   //NowBtn
    $(this).find('.btn-now').click(function(){
       $(this).parents('.input-group').find('input:first').val(moment().format(pydatefmt('{{DateTimeFormat}}')));
    });
+
+   //Pagination
    $(this).find('.page-link').click(function(ev){
       ev.preventDefault();
       var url='{%url "widget" id="__id__"%}'.replace('__id__', '{{target.id}}')+$(this).attr('href');
@@ -70,6 +105,7 @@ $('#{{target.id}}').bind('ready', function(){
          .load(url, function(){ $(this).trigger('ready'); });
    });
 
+   //Charting Chart
    var chart=new Chart($('#{{target.id}}_chart'), {
       type: 'line',
       data: {
