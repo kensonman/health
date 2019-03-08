@@ -5,7 +5,9 @@
 # Author:   Kenson Man <kenson@kenson.idv.hk>
 # Desc:     Define the models for the health project;
 from django_tables2 import Table, Column, A, TemplateColumn 
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from pytz import timezone
 from webframe.CurrentUserMiddleware import get_current_request
 from webframe.models import Preference
 from .models import *
@@ -28,7 +30,9 @@ class IndexesTbl(Table):
    value=Column(attrs={'style': 'text-align: right'})
 
    def render_time(self, value):
-      return value.strftime(Preference.objects.pref('FMT_DATETIME', user=get_current_request().user, defval='%Y-%m-%d %H:%M', returnValue=True))
+      if not hasattr(self, 'tz'):
+         setattr(self, 'tz', timezone(settings.TIME_ZONE))
+      return value.astimezone(self.tz).strftime(Preference.objects.pref('FMT_DATETIME', user=get_current_request().user, defval='%Y-%m-%d %H:%M', returnValue=True))
 
    def render_value(self, record, value):
       return record.category.fmt.format(value)
