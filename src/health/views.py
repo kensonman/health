@@ -96,11 +96,16 @@ def widget(req, id):
          index.tags.add(t)
       return redirect('dashboard')
 
+   filter=[f.strip() for f in req.GET.get('filter', '').split(',') if len(f.strip()) > 0]
    page=int(req.GET.get('page', '1'))
    pageSize=int(Preference.objects.pref('PAGE_SIZE', defval=10, user=req.user, returnValue=True))
    params['data']=Index.objects.filter(category=target).order_by('-time')
+   for f in filter: 
+      logger.info('Atemp filter: %s'%f)
+      params['data']=params['data'].filter(tags__in=Tag.objects.filter(name=f))
    params['target']=target
    params['indexes']=Paginator(params['data'], pageSize).page(page)
    params['table']=IndexesTbl(params['data'])
+   params['filter']=', '.join(filter)
    RequestConfig(req, paginate={'per_page': pageSize}).configure(params['table'])
    return render(req, 'health/widget.html', params)

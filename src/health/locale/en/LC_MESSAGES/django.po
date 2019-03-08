@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 13:37+0000\n"
+"POT-Creation-Date: 2019-03-08 09:04+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -25,7 +25,7 @@ msgid "Category.name"
 msgstr "Name"
 
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5 views.py:63 views.py:68
+#: templates/health/category.html:5 views.py:66 views.py:71
 msgid "health.models.Category"
 msgstr "Category"
 
@@ -74,7 +74,7 @@ msgstr "Index"
 msgid "health.models.Indexes"
 msgstr "Indexes"
 
-#: models.py:51 templates/health/widget.html:19
+#: models.py:51 templates/health/widget.html:28
 msgid "Index.time"
 msgstr "Time"
 
@@ -82,11 +82,11 @@ msgstr "Time"
 msgid "Index.category"
 msgstr "Category"
 
-#: models.py:53 templates/health/widget.html:26
+#: models.py:53 templates/health/widget.html:35
 msgid "Index.value"
 msgstr "Value"
 
-#: models.py:54 tables.py:27 templates/health/widget.html:32
+#: models.py:54 tables.py:29 templates/health/widget.html:41
 msgid "Index.tags"
 msgstr "Tags"
 
@@ -141,20 +141,24 @@ msgstr "Logout"
 msgid "login"
 msgstr "Login"
 
-#: templates/health/widget.html:15 templates/health/widget.html:39
+#: templates/health/widget.html:10
+msgid "actions.filter"
+msgstr "Filter"
+
+#: templates/health/widget.html:24 templates/health/widget.html:48
 msgid "actions.new-record"
 msgstr "New Record"
 
-#: templates/health/widget.html:20
+#: templates/health/widget.html:29
 msgid "now"
 msgstr "Now"
 
-#: views.py:63
+#: views.py:66
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] saved"
 msgstr "%(objtype)s::%(target)s[%(id)s] saved successfully!"
 
-#: views.py:68
+#: views.py:71
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
 msgstr "%(objtype)s::%(target)s[%(id)s] deleted!"
