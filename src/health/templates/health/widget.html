@@ -3,89 +3,120 @@
 {%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
 <div class="row" id="{{target.id}}_row">
    <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
-      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm">
-         {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
-         <input type="hidden" name="filter" value="{{filter}}"/>
-         <div class="pnl-tags input-group btn-group">
-            <div class="input-group-prepend input-group-text"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
-            {%for t in target.tags%}
-               <button type="button" class="btn btn-outline-success btn-filter" value="{{t.name}}">{{t.name}}</button>
-            {%endfor%}
-         </div>
-         <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
-         {%render_table table%}
-      </form>
+      {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
+
+      <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
+
+      {%render_table table%}
    </div><!-- End of #{{target.id}}_detailPnl -->
-   <form class="col-12 col-md-4" method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}">
-      {%csrf_token%}
-      <input type="hidden" name="_method" value="POST"/>
-      <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
-      <h3>{%trans 'actions.new-record'%}</h3>
+   <!--- Side Pnl -->
+   <div class="col-12 col-md-4">
+      <!-- Filter Form -->
+      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" style="padding:5px" class="card">
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody" style="cursor:pointer"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
+         <div class="card-body" id="{{target.id}}_filterBody">
+            {%if target.tags%}<div class="field form-group pnl-tags btn-group input-group">
+               <div class="input-group-prepend input-group-text">{%trans 'Index.tags'%}</div>
+               <input type="hidden" name="filter" value="{{filter}}"/>
+               {%for t in target.tags%}
+               <button type="button" class="btn btn-outline-success btn-filter" value="{{t.name}}">{{t.name}}</button>
+               {%endfor%}
+            </div>{%endif%}
 
-      <div class="field form-group">
-         <div class="input-group field-datetime" data-target-input="nearest" id="indexTimeField">
-            <input type="text" class="form-control daettimepicker-input" required="required" name="time" id="timeFld" placeholder="{%trans 'Index.time'%}" data-target="#indexTimeField" data-toggle="datetimepicker"/>
-            <div class="input-group-append"><button class="btn btn-secondary btn-now" type="button" title="{%trans 'now'%}"><i class="fas fa-clock"></i></button></div>
+            <div class="field form-group">
+               <div class="input-group">
+                  <div class="input-group-prepend input-group-text">{%trans 'views.widget.form'%}</div>
+                  <input type="text" class="form-control field-datetime" id="{{target.id}}_formFld" name="form" data-toggle="datetimepicker" data-target="#{{target.id}}_formFld" placeholder="{%trans 'views.widget.form'%}" value="{{form|pydate:DateTimeFormat|default:''}}"/>
+               </div>
+            </div>
+
+            <div class="field to-group">
+               <div class="input-group">
+                  <div class="input-group-prepend input-group-text">{%trans 'views.widget.to'%}</div>
+                  <input type="text" class="form-control field-datetime" id="{{target.id}}_toFld" name="to" data-toggle="datetimepicker" data-target="#{{target.id}}_toFld" placeholder="{%trans 'views.widget.to'%}" value="{{to|pydate:DateTimeFormat|default:''}}"/>
+               </div>
+            </div>
+
+            <div class="pnl-btns">
+               <button type="submit" class="btn btn-success"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</button>
+            </div>
          </div>
-      </div>
+      </form>
 
-      <div class="field form-group">
-         <div class="input-group">
-            <input type="number" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="" number="number"/>
+      <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card">
+         {%csrf_token%}
+         <input type="hidden" name="_method" value="POST"/>
+         <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
+
+         <div class="card-header">{%trans 'actions.new-record'%}</div>
+
+         <div class="card-body">
+            <div class="field form-group">
+               <div class="input-group field-datetime" data-target-input="nearest" id="{{target.id}}_indexTimeFld">
+                  <input type="text" class="form-control daettimepicker-input" required="required" name="time" placeholder="{%trans 'Index.time'%}" data-target="#{{target.id}}_indexTimeFld" data-toggle="datetimepicker"/>
+                  <div class="input-group-append"><button class="btn btn-secondary btn-now" type="button" title="{%trans 'now'%}"><i class="fas fa-clock"></i></button></div>
+               </div>
+            </div>
+
+            <div class="field form-group">
+               <div class="input-group">
+                  <input type="number" class="form-control" required="required" name="value" id="valueFld" placeholder="{%trans 'Index.value'%}" value="" number="number"/>
+               </div>
+            </div>
+
+            {%if target.tags%}<div class="field form-group pnl-tags btn-group input-group">
+               <div class="input-group-prepend input-group-text">{%trans 'Index.tags'%}</div>
+               <input type="hidden" name="tags" value=""/>
+               {%for t in target.tags%}
+               <button type="button" class="btn btn-outline-info btn-tag" value="{{t.name}}">{{t.name}}</button>
+               {%endfor%}
+            </div>{%endif%}
+
+            <div class="pnl-btns">
+               <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.new-record'%}</button>
+            </div>
          </div>
-      </div>
-
-      {%if target.tags%}
-      <div class="field form-group">
-         <label for="tagsFld">{%trans 'Index.tags'%}</label>
-         <input type="hidden" name="tags" value=""/>
-         <div>{%for t in target.tags%}<button type="button" class="btn btn-outline-info tagBtn" value="{{t.name}}">{{t.name}}</button>{%endfor%}</div>
-      </div>
-      {%endif%}
-
-      <div class="pnl-btns">
-         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> {%trans 'actions.new-record'%}</button>
-      </div>
-   </form>
-</div><!-- end of row -->
+      </form>
+   </div>
+</div><!-- End for #{{target.id}}_row -->
 
 <script type="text/javascript"><!--
 $('#{{target.id}}').bind('ready', function(){
    $(this).unbind('ready');
-   //TagBtn
-   $('.tagBtn').click(function(){
-      if($(this).attr('clicked')){
-         $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
-      }else{
+   //Handling tags
+   $(this).find('.btn-tag').click(function(){
+      if($(this).attr('clicked')==undefined)
          $(this).removeClass('btn-outline-info').addClass('btn-info').attr('clicked', 'clicked');
-      }
-      $('input[name=tags]').val('');
-      $('.tagBtn[clicked]').each(function(){ 
-         var curr=$('input[name=tags]').val();
-         if(curr.length>0)curr+=', ';
-         $('input[name=tags]').val(curr+$(this).attr('value')); 
-      });
+      else
+         $(this).removeClass('btn-info').addClass('btn-outline-info').removeAttr('clicked', 'clicked');
+      $('#{{target.id}}').find('input[name=tags]').val($('#{{target.id}}').find('.btn-tag[clicked=clicked]').map(function(){return $(this).attr('value');}).get().join());
    });
    $('#{{target.id}}_form').validate();
    //Handling filter
    $(this).find('.btn-filter').click(function(){
-      if($(this).attr('checked')==undefined)
-         $(this).attr('checked', 'checked').removeClass('btn-outline-success').addClass('btn-success');
+      if($(this).attr('clicked')==undefined)
+         $(this).removeClass('btn-outline-success').addClass('btn-success').attr('clicked', 'clicked');
       else
-         $(this).removeAttr('checked').removeClass('btn-success').addClass('btn-outline-success');
-      $('#{{target.id}}').find('input[name=filter]').val($('#{{target.id}}').find('.btn-filter[checked=checked]').map(function(){return $(this).attr('value');}).get().join());
-      $('#{{target.id}}').find('#{{target.id}}_filterFrm').hide().after('<i class="fas fa-spinner fa-spin"></i>').ajaxSubmit({
+         $(this).removeClass('btn-success').addClass('btn-outline-success').removeAttr('clicked', 'clicked');
+      $('#{{target.id}}').find('input[name=filter]').val($('#{{target.id}}').find('.btn-filter[clicked=clicked]').map(function(){return $(this).attr('value');}).get().join());
+   });
+   $('#{{target.id}}_filterFrm').submit(function(ev){
+      ev.preventDefault();
+      $(this).hide().after('<i class="fas fa-spinner fa-spin"></i>').ajaxSubmit({
          target: '#{{target.id}} > .card-body', 
          success: function(){ $('#{{target.id}}').trigger('ready');},
       });
-   });
+   }).validate();
    var filter=$(this).find('input[name=filter]').val().split(',');
    for(var i=0; i<filter.length; i++){
       var f=filter[i].trim();
       if(f.length<1)continue;
       $(this).find('.btn-filter[value='+f+']').removeClass('btn-outline-success').addClass('btn-success').attr('checked', 'checked');
    }
+
+   //ToggleTrigger
+   $('#{{target.id}}').find('.toggle-trigger').click(function(){ $($(this).attr('data-toggle')).toggle(); }).click();
 
    //Init Datetime-Picker
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
