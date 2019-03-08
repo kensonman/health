@@ -14,6 +14,8 @@
    <div class="col-12 col-md-4">
       <!-- Filter Form -->
       <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" style="padding:5px" class="card">
+         <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
+
          <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody" style="cursor:pointer"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
          <div class="card-body" id="{{target.id}}_filterBody">
             {%if target.tags%}<div class="field form-group pnl-tags btn-group input-group">
