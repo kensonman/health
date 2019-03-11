@@ -13,7 +13,7 @@
    <!--- Side Pnl -->
    <div class="col-12 col-md-4">
       <!-- Filter Form -->
-      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" style="padding:5px" class="card">
+      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" class="card" style="padding:0px">
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
          <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody" style="cursor:pointer"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
@@ -47,7 +47,7 @@
          </div>
       </form>
 
-      <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card">
+      <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card" style="padding:0px">
          {%csrf_token%}
          <input type="hidden" name="_method" value="POST"/>
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
