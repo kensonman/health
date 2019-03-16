@@ -9,6 +9,14 @@
    </div>{%endfor%}
 </div>{%endblock%}
 
+{%block scripts%}{{block.super}}
+<style type="text/css">
+form.card{ padding: 0px; }
+.toggle-trigger{ cursor: pointer; }
+.field-value{ text-align: right; }
+</style>
+{%endblock%}
+
 {%block loading%}{{block.super}}
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="{%static 'js/extendedLineChart.js'%}"></script>

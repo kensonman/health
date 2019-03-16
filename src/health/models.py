@@ -26,6 +26,7 @@ class Category(OrderableValueObject):
    maximum                 =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Category.maximum'))
    fmt                     =models.CharField(max_length=20, default='{}', verbose_name=_('Category.fmt'))
    user                    =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('Category.user'))
+   unit                    =models.CharField(max_length=10, null=True, blank=True, verbose_name=_('Category.unit'))
 
    @property
    def tags(self):
@@ -52,6 +53,7 @@ class Index(ValueObject):
    category                =models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name=_('Index.category'))
    value                   =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Index.value'))
    tags                    =models.ManyToManyField(Tag, verbose_name=_('Index.tags'))
+   desc                    =models.TextField(max_length=200, null=True,blank=True, verbose_name=_('Index.desc'))
 
    @property
    def tagsString(self):

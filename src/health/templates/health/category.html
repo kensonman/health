@@ -22,6 +22,11 @@
          <label for="fmtFld">{%trans 'Category.fmt'%}</label>
          <input type="text" name="fmt" id="fmtFld" value="{{target.fmt|default:''}}" required="required" class="form-control"/>
       </div>
+
+      <div class="field form-group">
+         <label for="unitFld">{%trans 'Category.unit'%}</label>
+         <input type="text" name="unit" id="unitFld" value="{{target.unit|default:''}}" required="required" class="form-control"/>
+      </div>
       
       <div class="field form-group">
          <label for="sequenceFld">{%trans 'Category.sequence'%}</label>
@@ -60,10 +65,12 @@ $(document).ready(function(){
          $('#voForm input').removeAttr('readonly');
          $('#voForm textarea').removeAttr('readonly');
          $('#voForm').removeAttr('readonly');
+         $('button[type=submit]').show();
       }else{
          $('#voForm input').attr('readonly', 'readonly');
          $('#voForm textarea').attr('readonly', 'readonly');
          $('#voForm').attr('readonly', 'readonly');
+         $('button[type=submit]').hide();
       }
    };
    $('#readonlyBtn').click(toggleReadonly).click();

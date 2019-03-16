@@ -17,14 +17,14 @@ class CategoriesTbl(Table):
       model=Category
       attrs={'class': 'table'}
       row_attrs={ 'oId': lambda record: record.id }
-      fields=('id', 'name', 'lmb', 'lmd')
+      fields=('id', 'name', 'fmt', 'unit', 'lmb', 'lmd')
 
 class IndexesTbl(Table):
    class Meta(object):
       model=Index
       attrs={'class': 'table'}
       row_attrs={ 'oId': lambda record: record.id, 'class':'row-data' }
-      fields=('time', 'value', 'tagsString')
+      fields=('time', 'value', 'tagsString', 'desc')
 
    tagsString=Column(verbose_name=_('Index.tags'))
    value=Column(attrs={'style': 'text-align: right'})
