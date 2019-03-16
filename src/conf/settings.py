@@ -26,8 +26,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9d4+exhq7pq(*5ow9_my49g7hzr+%^*k$fuylts12k+y64xz_%'
-SECURE_SSL_REDIRECT=True
+SECRET_KEY = os.getenv('SECRET_KEY', '9d4+exhq7pq(*5ow9_my49g7hzr+%^*k$fuylts12k+y64xz_%')
+SECURE_SSL_REDIRECT=bool(os.getenv('SECRET_SSL_REDIRECT', True))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', True)
@@ -93,11 +93,12 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DBMS', 'django.db.backends.postgresql'),
-        'NAME': os.getenv('DBNAME', 'health'), 
-        'USER': os.getenv('DBUSER', 'health'),
-        'PASSWORD': os.getenv('DBPASS', 'healthpass'),
-        'HOST': os.getenv('DBHOST', 'dbhost'),
+        'ENGINE':    os.getenv('DBMS', 'django.db.backends.postgresql'),
+        'NAME':      os.getenv('DBNAME', 'health'), 
+        'USER':      os.getenv('DBUSER', 'health'),
+        'PASSWORD':  os.getenv('DBPASS', 'healthpass'),
+        'HOST':      os.getenv('DBHOST', 'dbhost'),
+        'PORT':      os.getenv('DBPORT', 5432),
     }
 }
 
@@ -169,4 +170,4 @@ LOGGING={
    },
 }
 
-VERSION='v0.4.4'
+VERSION='v0.4.5'
