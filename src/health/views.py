@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db import transaction
+from django.db.models import Min, Max, Avg
 from django.shortcuts import render, redirect, get_object_or_404 as getObj
 from django.utils.translation import gettext_lazy as _
 from django_tables2.config import RequestConfig
@@ -104,6 +105,7 @@ def widget(req, id):
       page=int(req.GET.get('page', '1'))
       pageSize=int(Preference.objects.pref('PAGE_SIZE', defval=10, user=req.user, returnValue=True))
       params['data']=Index.objects.filter(category=target).order_by('-time')
+      params['info']=params['data'].aggregate(avg=Avg('value'), max=Max('value'), min=Min('value'))
       for f in filter: 
          logger.info('Atemp filter: %s'%f)
          params['data']=params['data'].filter(tags__in=Tag.objects.filter(name=f))

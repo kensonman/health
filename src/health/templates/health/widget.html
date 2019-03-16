@@ -1,4 +1,4 @@
-{%load i18n pydate pref django_tables2%}
+{%load i18n pydate pref django_tables2 stringformat%}
 {%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
 {%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
 <div class="row" id="{{target.id}}_row">
@@ -16,7 +16,7 @@
       <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" class="card">
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
-         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody"><i class="fas fa-filter"></i> {%trans 'views.widgets.filter'%}</div>
          <div class="card-body" id="{{target.id}}_filterBody">
             {%if target.tags%}<div class="field form-group pnl-tags btn-group input-group">
                <div class="input-group-prepend input-group-text">{%trans 'Index.tags'%}</div>
@@ -47,12 +47,30 @@
          </div>
       </form>
 
+      <div class="card">
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_infoPnl"><i class="fas fa-info-circle"></i> {%trans 'views.widgets.detail'%}</div>
+         <div class="card-body" id="{{target.id}}_infoPnl">
+            <div class="input-group">
+               <label class="input-group-prepend input-group-text">{%trans 'views.widgets.min'%}</label>
+               <span class="form-control">{{info.min|stringformat:target.fmt}}</span>
+            </div>
+            <div class="input-group">
+               <label class="input-group-prepend input-group-text">{%trans 'views.widgets.max'%}</label>
+               <span class="form-control">{{info.max|stringformat:target.fmt}}</span>
+            </div>
+            <div class="input-group">
+               <label class="input-group-prepend input-group-text">{%trans 'views.widgets.avg'%}</label>
+               <span class="form-control">{{info.avg|stringformat:target.fmt}}</span>
+            </div>
+         </div>
+      </div>
+
       <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card">
          {%csrf_token%}
          <input type="hidden" name="_method" value="POST"/>
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
-         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_formBody"><i class="fas fa-laptop-medical"></i> {%trans 'actions.new-record'%}</div>
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_formBody"><i class="fas fa-laptop-medical"></i> {%trans 'views.widgets.new-record'%}</div>
 
          <div class="card-body" id="{{target.id}}_formBody">
             <div class="field form-group">
@@ -130,8 +148,8 @@ $('#{{target.id}}').bind('ready', function(){
    }
 
    //ToggleTrigger
-   $('#{{target.id}}').find('.toggle-trigger').click(function(){ $($(this).attr('data-toggle')).toggle(); });
-   $('#{{target.id}}').find('.toggle-trigger:first').click().end().find('form.card').css('padding', '0px');
+   $('#{{target.id}}').find('.toggle-trigger').click(function(){ $($(this).attr('data-toggle')).toggle(); }).end().find('.card').css('padding', '0px');
+   $('#{{target.id}}').find('.toggle-trigger:first').click();
 
    //Init Datetime-Picker
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});

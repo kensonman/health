@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-16 04:05+0000\n"
+"POT-Creation-Date: 2019-03-16 04:32+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: TChinese\n"
@@ -74,7 +74,7 @@ msgstr "指數"
 msgid "health.models.Indexes"
 msgstr "指數"
 
-#: models.py:51 templates/health/widget.html:60
+#: models.py:51 templates/health/widget.html:78
 msgid "Index.time"
 msgstr "時間"
 
@@ -82,16 +82,16 @@ msgstr "時間"
 msgid "Index.category"
 msgstr "所屬類別"
 
-#: models.py:53 templates/health/widget.html:67
+#: models.py:53 templates/health/widget.html:85
 msgid "Index.value"
 msgstr "數值"
 
 #: models.py:54 tables.py:29 templates/health/widget.html:22
-#: templates/health/widget.html:76
+#: templates/health/widget.html:94
 msgid "Index.tags"
 msgstr "標籤"
 
-#: models.py:55 templates/health/widget.html:72
+#: models.py:55 templates/health/widget.html:90
 msgid "Index.desc"
 msgstr "說明"
 
@@ -146,8 +146,8 @@ msgstr "登出"
 msgid "login"
 msgstr "登入"
 
-#: templates/health/widget.html:19 templates/health/widget.html:45
-msgid "actions.filter"
+#: templates/health/widget.html:19
+msgid "views.widgets.filter"
 msgstr "篩選資料"
 
 #: templates/health/widget.html:31 templates/health/widget.html:32
@@ -162,13 +162,37 @@ msgstr "至"
 msgid "actions.reset"
 msgstr "重設"
 
-#: templates/health/widget.html:55 templates/health/widget.html:84
-msgid "actions.new-record"
-msgstr "新增記錄"
+#: templates/health/widget.html:45
+msgid "actions.filter"
+msgstr "篩選資料"
 
-#: templates/health/widget.html:61
+#: templates/health/widget.html:51
+msgid "views.widgets.detail"
+msgstr "總結資料"
+
+#: templates/health/widget.html:54
+msgid "views.widgets.min"
+msgstr "最小值"
+
+#: templates/health/widget.html:58
+msgid "views.widgets.max"
+msgstr "最大值"
+
+#: templates/health/widget.html:62
+msgid "views.widgets.avg"
+msgstr "平均值"
+
+#: templates/health/widget.html:73
+msgid "views.widgets.new-record"
+msgstr "新增資料"
+
+#: templates/health/widget.html:79
 msgid "now"
 msgstr "現在"
+
+#: templates/health/widget.html:102
+msgid "actions.new-record"
+msgstr "新增記錄"
 
 #: views.py:66
 #, python-format
