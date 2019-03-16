@@ -52,6 +52,7 @@ class Index(ValueObject):
    category                =models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name=_('Index.category'))
    value                   =models.DecimalField(max_digits=maxval, decimal_places=decval, default=defval, verbose_name=_('Index.value'))
    tags                    =models.ManyToManyField(Tag, verbose_name=_('Index.tags'))
+   desc                    =models.TextField(max_length=200, null=True,blank=True, verbose_name=_('Index.desc'))
 
    @property
    def tagsString(self):

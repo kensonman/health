@@ -24,7 +24,7 @@ class IndexesTbl(Table):
       model=Index
       attrs={'class': 'table'}
       row_attrs={ 'oId': lambda record: record.id, 'class':'row-data' }
-      fields=('time', 'value', 'tagsString')
+      fields=('time', 'value', 'tagsString', 'desc')
 
    tagsString=Column(verbose_name=_('Index.tags'))
    value=Column(attrs={'style': 'text-align: right'})

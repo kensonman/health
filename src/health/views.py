@@ -89,6 +89,7 @@ def widget(req, id):
       index.category=target
       index.time=getDateTime(req.POST.get('time', None), None, req.POST.get('FMT_DATETIME', FMT_DATETIME))
       index.value=float(req.POST.get('value', '0.0'))
+      index.desc=req.POST.get('desc', None)
       index.save()
       for t in req.POST.get('tags', '').split(','):
          if len(t.strip())<1: continue
