@@ -26,6 +26,6 @@ Supported Environment Variables
 
 ### Django related
 - SECRET_KEY            - The [secret key](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECRET_KEY) in django;
-- SECRET_SSL_REDIRECT   - The boolean value of [secret ssl redirect](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECURE_SSL_REDIRECT) in django;
+- SECURE_SSL_REDIRECT   - The boolean value of [secure ssl redirect](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-SECURE_SSL_REDIRECT) in django;
 - ALLOWED_HOST          - The [host name](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-ALLOWED_HOSTS);
 - DEBUG                 - The indicator of [debug](https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-DEBUG) status;
