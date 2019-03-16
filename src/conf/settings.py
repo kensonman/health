@@ -16,7 +16,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
+import os, logging
+logger=logging.getLogger('django.conf.settings')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,13 +28,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', '9d4+exhq7pq(*5ow9_my49g7hzr+%^*k$fuylts12k+y64xz_%')
-SECURE_SSL_REDIRECT=bool(os.getenv('SECRET_SSL_REDIRECT', True))
+SECURE_SSL_REDIRECT=bool(os.getenv('SECURE_SSL_REDIRECT', True))
+logger.warning('SECURE_SSL_REDIRECT==%s'%SECURE_SSL_REDIRECT)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = ['locahost:8000', 'localhost', 'health.kenson.idv.hk', ]
 if 'ALLOWED_HOST' in os.environ:
+   logger.warning('Adding ALLOWED-HOST: %s'%os.environ['ALLOWED_HOST'])
    ALLOWED_HOSTS+=[os.getenv('ALLOWED_HOST'), ]
 
 
@@ -101,6 +104,7 @@ DATABASES = {
         'PORT':      os.getenv('DBPORT', 5432),
     }
 }
+logger.warning('Using database backend: %s'%DATABASES['default']['ENGINE'])
 
 
 # Password validation
