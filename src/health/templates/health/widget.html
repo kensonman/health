@@ -2,7 +2,7 @@
 {%pref "FMT_DATETIME" defval="%Y-%m-%d %H:%M" returnValue=True as DateTimeFormat%}
 {%pref "FMT_DATETIME_SHORT" defval="%m-%d %H:%M" returnValue=True as ShortDateTimeFormat%}
 <div class="row" id="{{target.id}}_row">
-   <div class="col-12 col-md-8 pnl-widget-details" id="{{target.id}}_detailPnl">
+   <div class="col-12 col-md-8 col-lg-9 pnl-widget-details" id="{{target.id}}_detailPnl">
       {%if target.desc%}<div class="pnl-desc">{{target.desc}}</div>{%endif%}
 
       <div class="media-lobby"><canvas id="{{target.id}}_chart" class="media"></canvas></div>
@@ -11,7 +11,7 @@
    </div><!-- End of #{{target.id}}_detailPnl -->
 
    <!--- Side Pnl -->
-   <div class="col-12 col-md-4">
+   <div class="col-12 col-md-4 col-lg-3">
       <!-- Filter Form -->
       <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" class="card">
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
@@ -51,16 +51,20 @@
          <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_infoPnl"><i class="fas fa-info-circle"></i> {%trans 'views.widgets.detail'%}</div>
          <div class="card-body" id="{{target.id}}_infoPnl">
             <div class="input-group">
+               <label class="input-group-prepend input-group-text">{%trans 'views.widgets.total'%}</label>
+               <span class="form-control field-value">{%blocktrans with count=info.count%}{{count}} record(s){%endblocktrans%}</span>
+            </div>
+            <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.min'%}</label>
-               <span class="form-control">{{info.min|stringformat:target.fmt}}</span>
+               <span class="form-control field-value">{{info.min|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
             <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.max'%}</label>
-               <span class="form-control">{{info.max|stringformat:target.fmt}}</span>
+               <span class="form-control field-value">{{info.max|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
             <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.avg'%}</label>
-               <span class="form-control">{{info.avg|stringformat:target.fmt}}</span>
+               <span class="form-control field-value">{{info.avg|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
          </div>
       </div>

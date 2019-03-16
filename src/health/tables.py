@@ -17,7 +17,7 @@ class CategoriesTbl(Table):
       model=Category
       attrs={'class': 'table'}
       row_attrs={ 'oId': lambda record: record.id }
-      fields=('id', 'name', 'lmb', 'lmd')
+      fields=('id', 'name', 'fmt', 'unit', 'lmb', 'lmd')
 
 class IndexesTbl(Table):
    class Meta(object):

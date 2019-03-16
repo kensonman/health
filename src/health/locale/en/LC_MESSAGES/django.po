@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-16 04:32+0000\n"
+"POT-Creation-Date: 2019-03-16 05:55+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: English\n"
@@ -25,7 +25,7 @@ msgid "Category.name"
 msgstr "Name"
 
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5 views.py:66 views.py:71
+#: templates/health/category.html:5 views.py:68 views.py:73
 msgid "health.models.Category"
 msgstr "Category"
 
@@ -38,11 +38,11 @@ msgstr "Categories"
 msgid "Category.desc"
 msgstr "Desc"
 
-#: models.py:25 templates/health/category.html:32
+#: models.py:25 templates/health/category.html:37
 msgid "Category.minimum"
 msgstr "Minimum Standard"
 
-#: models.py:26 templates/health/category.html:37
+#: models.py:26 templates/health/category.html:42
 msgid "Category.maximum"
 msgstr "Maximum Standard"
 
@@ -50,48 +50,52 @@ msgstr "Maximum Standard"
 msgid "Category.fmt"
 msgstr "Format"
 
-#: models.py:40
+#: models.py:29 templates/health/category.html:27
+msgid "Category.unit"
+msgstr "Unit"
+
+#: models.py:41
 msgid "health.models.Tag"
 msgstr "Tag"
 
-#: models.py:41
+#: models.py:42
 msgid "health.models.Tags"
 msgstr "Tags"
 
-#: models.py:43
+#: models.py:44
 msgid "Tag.category"
 msgstr "Category"
 
-#: models.py:44
+#: models.py:45
 msgid "Tag.name"
 msgstr "Name"
 
-#: models.py:48
+#: models.py:49
 msgid "health.models.Index"
 msgstr "Index"
 
-#: models.py:49
+#: models.py:50
 msgid "health.models.Indexes"
 msgstr "Indexes"
 
-#: models.py:51 templates/health/widget.html:78
+#: models.py:52 templates/health/widget.html:82
 msgid "Index.time"
 msgstr "Time"
 
-#: models.py:52
+#: models.py:53
 msgid "Index.category"
 msgstr "Category"
 
-#: models.py:53 templates/health/widget.html:85
+#: models.py:54 templates/health/widget.html:89
 msgid "Index.value"
 msgstr "Value"
 
-#: models.py:54 tables.py:29 templates/health/widget.html:22
-#: templates/health/widget.html:94
+#: models.py:55 tables.py:29 templates/health/widget.html:22
+#: templates/health/widget.html:98
 msgid "Index.tags"
 msgstr "Tags"
 
-#: models.py:55 templates/health/widget.html:90
+#: models.py:56 templates/health/widget.html:94
 msgid "Index.desc"
 msgstr "Desc"
 
@@ -105,19 +109,19 @@ msgstr "Health"
 msgid "health.models.Category.create"
 msgstr "Create Category"
 
-#: templates/health/category.html:27
+#: templates/health/category.html:32
 msgid "Category.sequence"
 msgstr "Sequence"
 
-#: templates/health/category.html:42
+#: templates/health/category.html:47
 msgid "Category.tags"
 msgstr "Tags"
 
-#: templates/health/category.html:47
+#: templates/health/category.html:52
 msgid "actions.readonly"
 msgstr "Edit/ReadOnly"
 
-#: templates/health/category.html:48
+#: templates/health/category.html:53
 msgid "actions.submit"
 msgstr "Submit"
 
@@ -171,35 +175,44 @@ msgid "views.widgets.detail"
 msgstr "Detail"
 
 #: templates/health/widget.html:54
+msgid "views.widgets.total"
+msgstr "Total"
+
+#: templates/health/widget.html:55
+#, python-format
+msgid "%(count)s record(s)"
+msgstr "%(count)s record(s) summarized"
+
+#: templates/health/widget.html:58
 msgid "views.widgets.min"
 msgstr "Min"
 
-#: templates/health/widget.html:58
+#: templates/health/widget.html:62
 msgid "views.widgets.max"
 msgstr "Max"
 
-#: templates/health/widget.html:62
+#: templates/health/widget.html:66
 msgid "views.widgets.avg"
 msgstr "Avg"
 
-#: templates/health/widget.html:73
+#: templates/health/widget.html:77
 msgid "views.widgets.new-record"
 msgstr "New Record"
 
-#: templates/health/widget.html:79
+#: templates/health/widget.html:83
 msgid "now"
 msgstr "Now"
 
-#: templates/health/widget.html:102
+#: templates/health/widget.html:106
 msgid "actions.new-record"
 msgstr "New Record"
 
-#: views.py:66
+#: views.py:68
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] saved"
 msgstr "%(objtype)s::%(target)s[%(id)s] saved successfully!"
 
-#: views.py:71
+#: views.py:73
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
 msgstr "%(objtype)s::%(target)s[%(id)s] deleted!"

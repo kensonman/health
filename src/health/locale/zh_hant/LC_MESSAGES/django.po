@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-16 04:32+0000\n"
+"POT-Creation-Date: 2019-03-16 05:55+0000\n"
 "PO-Revision-Date: 2019-03-02 14:49+0800\n"
 "Last-Translator: Kenson Man <kenson@kenson.idv.hk>\n"
 "Language-Team: TChinese\n"
@@ -25,7 +25,7 @@ msgid "Category.name"
 msgstr "類別名稱"
 
 #: models.py:20 templates/health/category.html:2
-#: templates/health/category.html:5 views.py:66 views.py:71
+#: templates/health/category.html:5 views.py:68 views.py:73
 msgid "health.models.Category"
 msgstr "類別"
 
@@ -38,11 +38,11 @@ msgstr "類別"
 msgid "Category.desc"
 msgstr "類別說明"
 
-#: models.py:25 templates/health/category.html:32
+#: models.py:25 templates/health/category.html:37
 msgid "Category.minimum"
 msgstr "標準最低值"
 
-#: models.py:26 templates/health/category.html:37
+#: models.py:26 templates/health/category.html:42
 msgid "Category.maximum"
 msgstr "標準最高值"
 
@@ -50,48 +50,52 @@ msgstr "標準最高值"
 msgid "Category.fmt"
 msgstr "數值格式"
 
-#: models.py:40
+#: models.py:29 templates/health/category.html:27
+msgid "Category.unit"
+msgstr "數值單位"
+
+#: models.py:41
 msgid "health.models.Tag"
 msgstr "標籤"
 
-#: models.py:41
+#: models.py:42
 msgid "health.models.Tags"
 msgstr "標籤"
 
-#: models.py:43
+#: models.py:44
 msgid "Tag.category"
 msgstr "所屬類別"
 
-#: models.py:44
+#: models.py:45
 msgid "Tag.name"
 msgstr "標籤名稱"
 
-#: models.py:48
+#: models.py:49
 msgid "health.models.Index"
 msgstr "指數"
 
-#: models.py:49
+#: models.py:50
 msgid "health.models.Indexes"
 msgstr "指數"
 
-#: models.py:51 templates/health/widget.html:78
+#: models.py:52 templates/health/widget.html:82
 msgid "Index.time"
 msgstr "時間"
 
-#: models.py:52
+#: models.py:53
 msgid "Index.category"
 msgstr "所屬類別"
 
-#: models.py:53 templates/health/widget.html:85
+#: models.py:54 templates/health/widget.html:89
 msgid "Index.value"
 msgstr "數值"
 
-#: models.py:54 tables.py:29 templates/health/widget.html:22
-#: templates/health/widget.html:94
+#: models.py:55 tables.py:29 templates/health/widget.html:22
+#: templates/health/widget.html:98
 msgid "Index.tags"
 msgstr "標籤"
 
-#: models.py:55 templates/health/widget.html:90
+#: models.py:56 templates/health/widget.html:94
 msgid "Index.desc"
 msgstr "說明"
 
@@ -105,19 +109,19 @@ msgstr "Health"
 msgid "health.models.Category.create"
 msgstr "新增類別"
 
-#: templates/health/category.html:27
+#: templates/health/category.html:32
 msgid "Category.sequence"
 msgstr "排序"
 
-#: templates/health/category.html:42
+#: templates/health/category.html:47
 msgid "Category.tags"
 msgstr "標籤"
 
-#: templates/health/category.html:47
+#: templates/health/category.html:52
 msgid "actions.readonly"
 msgstr "編輯/唯讀"
 
-#: templates/health/category.html:48
+#: templates/health/category.html:53
 msgid "actions.submit"
 msgstr "儲存"
 
@@ -168,38 +172,47 @@ msgstr "篩選資料"
 
 #: templates/health/widget.html:51
 msgid "views.widgets.detail"
-msgstr "總結資料"
+msgstr "統計資料"
 
 #: templates/health/widget.html:54
+msgid "views.widgets.total"
+msgstr "統計了"
+
+#: templates/health/widget.html:55
+#, python-format
+msgid "%(count)s record(s)"
+msgstr "%(count)s 項資料"
+
+#: templates/health/widget.html:58
 msgid "views.widgets.min"
 msgstr "最小值"
 
-#: templates/health/widget.html:58
+#: templates/health/widget.html:62
 msgid "views.widgets.max"
 msgstr "最大值"
 
-#: templates/health/widget.html:62
+#: templates/health/widget.html:66
 msgid "views.widgets.avg"
 msgstr "平均值"
 
-#: templates/health/widget.html:73
+#: templates/health/widget.html:77
 msgid "views.widgets.new-record"
 msgstr "新增資料"
 
-#: templates/health/widget.html:79
+#: templates/health/widget.html:83
 msgid "now"
 msgstr "現在"
 
-#: templates/health/widget.html:102
+#: templates/health/widget.html:106
 msgid "actions.new-record"
 msgstr "新增記錄"
 
-#: views.py:66
+#: views.py:68
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] saved"
 msgstr "已儲存: %(objtype)s::%(target)s[%(id)s]!"
 
-#: views.py:71
+#: views.py:73
 #, python-format
 msgid "%(objtype)s::%(target)s[%(id)s] deleted"
 msgstr "已刪除: %(objtype)s::%(target)s[%(id)s]!"
