@@ -36,7 +36,7 @@ DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = ['locahost:8000', 'localhost', 'health.kenson.idv.hk', ]
 if 'ALLOWED_HOST' in os.environ:
-   logger.warning('Adding %s to allowed-host'%os.environ['ALLOWED_HOST'])
+   logger.warning('Adding ALLOWED-HOST: %s'%os.environ['ALLOWED_HOST'])
    ALLOWED_HOSTS+=[os.getenv('ALLOWED_HOST'), ]
 
 
