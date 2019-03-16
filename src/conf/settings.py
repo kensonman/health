@@ -30,9 +30,11 @@ SECRET_KEY = '9d4+exhq7pq(*5ow9_my49g7hzr+%^*k$fuylts12k+y64xz_%'
 SECURE_SSL_REDIRECT=True
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
-ALLOWED_HOSTS = ['locahost:8000', 'localhost', 'health.kenson.idv.hk']
+ALLOWED_HOSTS = ['locahost:8000', 'localhost', 'health.kenson.idv.hk', ]
+if 'ALLOWED_HOST' in os.environ:
+   ALLOWED_HOSTS+=[os.getenv('ALLOWED_HOST'), ]
 
 
 # Application definition
@@ -91,11 +93,11 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DBNAME', 'health'), 
-        'USER': os.environ.get('DBUSER', 'health'),
-        'PASSWORD': os.environ.get('DBPASS', 'healthpass'),
-        'HOST': os.environ.get('DBHOST', 'dbhost'),
+        'ENGINE': os.getenv('DBMS', 'django.db.backends.postgresql'),
+        'NAME': os.getenv('DBNAME', 'health'), 
+        'USER': os.getenv('DBUSER', 'health'),
+        'PASSWORD': os.getenv('DBPASS', 'healthpass'),
+        'HOST': os.getenv('DBHOST', 'dbhost'),
     }
 }
 
@@ -167,4 +169,4 @@ LOGGING={
    },
 }
 
-VERSION='v0.4.3'
+VERSION='v0.4.4'
