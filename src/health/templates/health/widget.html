@@ -13,10 +13,10 @@
    <!--- Side Pnl -->
    <div class="col-12 col-md-4">
       <!-- Filter Form -->
-      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" class="card" style="padding:0px">
+      <form action="{%url 'widget' id=target.id%}" method="GET" id="{{target.id}}_filterFrm" class="card">
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
-         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody" style="cursor:pointer"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_filterBody"><i class="fas fa-filter"></i> {%trans 'actions.filter'%}</div>
          <div class="card-body" id="{{target.id}}_filterBody">
             {%if target.tags%}<div class="field form-group pnl-tags btn-group input-group">
                <div class="input-group-prepend input-group-text">{%trans 'Index.tags'%}</div>
@@ -47,14 +47,14 @@
          </div>
       </form>
 
-      <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card" style="padding:0px">
+      <form method="POST" id="{{target.id}}_form" action="{%url 'widget' id=target.id%}" class="card">
          {%csrf_token%}
          <input type="hidden" name="_method" value="POST"/>
          <input type="hidden" name="FMT_DATETIME" value="{{DateTimeFormat}}"/>
 
-         <div class="card-header">{%trans 'actions.new-record'%}</div>
+         <div class="card-header toggle-trigger" data-toggle="#{{target.id}}_formBody"><i class="fas fa-laptop-medical"></i> {%trans 'actions.new-record'%}</div>
 
-         <div class="card-body">
+         <div class="card-body" id="{{target.id}}_formBody">
             <div class="field form-group">
                <div class="input-group field-datetime" data-target-input="nearest" id="{{target.id}}_indexTimeFld">
                   <input type="text" class="form-control daettimepicker-input" required="required" name="time" placeholder="{%trans 'Index.time'%}" data-target="#{{target.id}}_indexTimeFld" data-toggle="datetimepicker"/>
@@ -130,7 +130,8 @@ $('#{{target.id}}').bind('ready', function(){
    }
 
    //ToggleTrigger
-   $('#{{target.id}}').find('.toggle-trigger').click(function(){ $($(this).attr('data-toggle')).toggle(); }).click();
+   $('#{{target.id}}').find('.toggle-trigger').click(function(){ $($(this).attr('data-toggle')).toggle(); });
+   $('#{{target.id}}').find('.toggle-trigger:first').click().end().find('form.card').css('padding', '0px');
 
    //Init Datetime-Picker
    $(this).find('.field-datetime').datetimepicker({'format': pydatefmt('{{DateTimeFormat}}')});
