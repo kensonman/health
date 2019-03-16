@@ -56,15 +56,15 @@
             </div>
             <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.min'%}</label>
-               <span class="form-control field-value">{{info.min|stringformat:target.fmt}}{{target.unit}}</span>
+               <span class="form-control field-value">{{info.min|default:0|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
             <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.max'%}</label>
-               <span class="form-control field-value">{{info.max|stringformat:target.fmt}}{{target.unit}}</span>
+               <span class="form-control field-value">{{info.max|default:0|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
             <div class="input-group">
                <label class="input-group-prepend input-group-text">{%trans 'views.widgets.avg'%}</label>
-               <span class="form-control field-value">{{info.avg|stringformat:target.fmt}}{{target.unit}}</span>
+               <span class="form-control field-value">{{info.avg|default:0|stringformat:target.fmt}}{{target.unit}}</span>
             </div>
          </div>
       </div>

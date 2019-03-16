@@ -106,12 +106,12 @@ def widget(req, id):
       page=int(req.GET.get('page', '1'))
       pageSize=int(Preference.objects.pref('PAGE_SIZE', defval=10, user=req.user, returnValue=True))
       params['data']=Index.objects.filter(category=target).order_by('-time')
-      params['info']=params['data'].aggregate(avg=Avg('value'), max=Max('value'), min=Min('value'), count=Count('value'))
       for f in filter: 
          logger.info('Atemp filter: %s'%f)
          params['data']=params['data'].filter(tags__in=Tag.objects.filter(name=f))
       if startDate: params['data']=params['data'].filter(time__gte=startDate)
       if endDate: params['data']=params['data'].filter(time__lte=endDate)
+      params['info']=params['data'].aggregate(avg=Avg('value'), max=Max('value'), min=Min('value'), count=Count('value'))
       params['target']=target
       params['indexes']=Paginator(params['data'], pageSize).page(page)
       params['table']=IndexesTbl(params['data'])
