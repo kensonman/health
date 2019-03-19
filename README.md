@@ -34,7 +34,7 @@ The application is developed by [Docker](https://www.docker.com/) technologies.
 
 5. Execute the application by vist the [http://localhost/](http://localhost/) or [https://localhost/](https://localhost/). 
 
-![Login Screen](./docs/Login.png)
+![Login Screen](./docs/images/Login.png)
 
 6. The application will accept and create the first login provide as the system-administrator. 
 
