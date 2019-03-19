@@ -32,6 +32,22 @@ The application is developed by [Docker](https://www.docker.com/) technologies.
    docker run --name health.kenson.idv.hk --rm -p 80:80 -p 443:443 [-e "ENV=value"] hubs.mansonsolutions.hk/kenson.health:latest
    ```
 
+5. Execute the application by vist the [http://localhost/](http://localhost/) or [https://localhost/](https://localhost/). 
+
+![Login Screen](./docs/Login.png)
+
+6. The application will accept and create the first login provide as the system-administrator. 
+
+![Dashboard](./docs/images/Dashboard.png)
+
+7. The language and locale can be selected by Lang menu which located in menu-bar.
+
+![Locale menu](./docs/images/Lang.png)
+
+8. Create the first Category.
+
+![Categories](./docs/images/Categories.png)
+
 Supported Environment Variables<a name="env"></a>
 ====
 
