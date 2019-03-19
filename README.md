@@ -1,19 +1,38 @@
 Health
 ====
 
-Provide the basic recording features for storage the health properties.
+Provide the basic features to record the health properties.
+
+![Dashboard](./docs/images/Dashboard.png)
 
 Docker
 ====
 
 The application is developed by [Docker](https://www.docker.com/) technologies.
-Execute the application simply by the following command:
+
+## Get Started 
+
+1. After checkout the source code, simply switch to the "production" branch:
+
+   ```bash
+   git checkout -b production origin/production
+   ```
+
+2. (Optional)Configure and alter the source code as you wish.
+
+3. Execute the belows command to build the docker image:
+
+    ```bash
+    docker build -t hubs.mansonsolutions.hk/kenson.health:latest .
+    ```
+
+4. Execute the application in docker the following command(The environment variables can be found [here](#env)):
 
    ```bash
    docker run --name health.kenson.idv.hk --rm -p 80:80 -p 443:443 [-e "ENV=value"] hubs.mansonsolutions.hk/kenson.health:latest
    ```
 
-Supported Environment Variables
+Supported Environment Variables<a name="env"></a>
 ====
 
 ### Database related
